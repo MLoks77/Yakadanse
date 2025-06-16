@@ -7,6 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="../js/main.js"></script>
     <link rel="stylesheet" href="../css/connexion.css">
+    <link rel="stylesheet" href="../css/main.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Inline:opsz,wght@10..72,100..900&family=Didact+Gothic&family=Funnel+Display:wght@300..800&family=Kurale&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
@@ -15,8 +16,7 @@
 </head>
 <body>
     <?php require '../include/navbar.html'; ?>
-
-    <main class="container mx-auto px-4 py-8 mt-40">
+    <main class="container mx-auto px-4 py-8 mt-10">
         <div class="max-w-md mx-auto bg-white rounded-lg shadow-md p-8">
             <h1 class="text-black text-2xl font-bold text-center mb-6">Connexion</h1>
             <h4 class="text-gray-500 font-bold text-center mb-2">Ce formulaire est réservé au personnel de Yakadanse</h4><br>
@@ -32,14 +32,14 @@
                 <div>
                     <label for="identifiant" class="block text-sm  font-medium text-gray-700">identifiant</label>
                     <input type="identifiant" id="identifiant" name="identifiant" required 
-                           class="text-black mt-5 block w-full rounded-md border-gray-300 shadow-sm focus:border-pink-500 focus:ring-pink-500 pr-10 py-3 px-4 text-lg">
+                           class="text-black mt-5 block w-full rounded-md border-gray-300 shadow-sm focus:border-pink-400 focus:ring-pink-400 pr-10 py-3 px-4 text-lg">
                 </div>
 
                 <div class="relative">
                     <label for="password" class="block text-sm font-medium text-gray-700">Mot de passe</label>
                     <div class="relative">
                         <input type="password" id="password" name="password" required 
-                               class="text-black mt-5 block w-full rounded-md border-gray-300 shadow-sm focus:border-pink-500 focus:ring-pink-500 pr-10 py-3 px-4 text-lg">
+                               class="text-black mt-5 block w-full rounded-md border-gray-300 shadow-sm focus:border-pink-400 focus:ring-pink-400 pr-10 py-3 px-4 text-lg">
                         <button type="button" id="togglePassword" 
                                 class="text-black absolute inset-y-0 right-0 pr-3 flex items-center text-gray-600 hover:text-gray-800">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -57,7 +57,8 @@
             </form>
         </div>
     </main>
-
+    <section class="extra-space"></section>
+    <section class="extra-space"></section>
     <?php require '../include/footer.html'; ?>
 
     <script>

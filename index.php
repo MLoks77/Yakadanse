@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="/css/main.css">
-    <script src="/js/main.js"></script>
+    <link rel="stylesheet" href="css/main.css">
+    <script src="js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
     <meta></meta>
@@ -13,7 +13,7 @@
     <title>Accueil</title>
 </head>
 <body>
-<?php require '/include/navbar.php'; ?>
+<?php require 'includeindex/navbar.html'; ?>
 
     <main>
         <h1>Bienvenue</h1>
@@ -23,6 +23,6 @@
         </section>
     </main>
 
-<?php require '/include/footer.php'; ?>
+<?php require 'includeindex/footer.html'; ?>
 </body>
 </html>
