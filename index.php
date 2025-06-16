@@ -8,7 +8,7 @@
     <script src="/js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
-
+    <meta></meta>
 
     <title>Accueil</title>
 </head>

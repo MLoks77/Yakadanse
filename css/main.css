@@ -1,0 +1,33 @@
+/* Police Funnel Display */
+
+.funnel-display {
+  font-family: "Funnel Display", monospace;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+}
+
+.extra-space {
+    margin-top: 50px;
+}
+
+a {
+    font-family: "Funnel Display", monospace;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+}
+
+p {
+    font-family: "Funnel Display", monospace;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+}
+
+h1 {
+    font-family: "Funnel Display", monospace;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+}
