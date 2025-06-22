@@ -18,47 +18,50 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
-        // Fonction pour changer le fond avec transition
-        function changeBackground() {
+        // Nouvelle fonction de changement de fond avec transition noire
+        function changeBackgroundWithFade() {
             const randomBackground = backgrounds[Math.floor(Math.random() * backgrounds.length)];
-            
-            // Crée un élément temporaire pour la transition
-            const tempDiv = document.createElement('div');
-            tempDiv.style.cssText = `
+
+            // Met le fond du body en noir dès le départ
+            document.body.style.background = 'black';
+            document.body.style.backgroundImage = '';
+
+            // Crée un div pour la transition de fond
+            const bgTransitionDiv = document.createElement('div');
+            bgTransitionDiv.style.cssText = `
                 position: fixed;
                 top: 0;
                 left: 0;
-                width: 100%;
-                height: 100%;
-                background-image: url(${randomBackground});
-                background-size: cover;
-                background-position: center;
-                background-repeat: no-repeat;
-                background-attachment: fixed;
+                width: 100vw;
+                height: 100vh;
+                background: url(${randomBackground}) center center / cover no-repeat fixed;
                 opacity: 0;
-                transition: opacity 1s ease-in-out;
+                transition: opacity 400ms linear;
                 z-index: -1;
+                pointer-events: none;
             `;
-            
-            document.body.appendChild(tempDiv);
-            
-            // Déclenche la transition
-            requestAnimationFrame(() => {
-                tempDiv.style.opacity = '1';
-            });
+            document.body.appendChild(bgTransitionDiv);
 
-            // Nettoie l'ancien fond après la transition
+            // Lance le fondu de l'image (du noir vers l'image)
+            setTimeout(() => {
+                bgTransitionDiv.style.opacity = '1';
+            }, 10);
+
+            // Après la transition, applique l'image sur le body et supprime le div
             setTimeout(() => {
                 document.body.style.backgroundImage = `url(${randomBackground})`;
-                tempDiv.remove();
-            }, 800);
+                document.body.style.backgroundSize = 'cover';
+                document.body.style.backgroundPosition = 'center';
+                document.body.style.backgroundRepeat = 'no-repeat';
+                document.body.style.backgroundAttachment = 'fixed';
+                bgTransitionDiv.remove();
+            }, 410);
         }
 
         // Précharge les images
         preloadImages();
-        
-        // Change le fond initial
-        changeBackground();
+        // Change le fond initial avec la nouvelle animation
+        changeBackgroundWithFade();
     }
 
 });

@@ -12,7 +12,7 @@
 <body>
 <?php require '../include/navbar.html'; ?>
 
-    <main class="flex items-center justify-center min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <main class="flex items-center justify-center min-h-screen py-12 px-4 sm:px-6 lg:px-8">
         <div class="max-w-md w-full space-y-8 bg-white p-8 rounded-lg shadow-lg">
             <div>
                 <h1 class="text-3xl font-extrabold text-gray-900 text-center mb-2">Contactez-nous</h1>
