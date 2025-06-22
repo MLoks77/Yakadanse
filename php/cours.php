@@ -14,6 +14,7 @@
 </head>
 <body>
 <?php require '../include/navbar.html'; ?>
+<?php require '../hero/courshero.html'; ?>
 
     <main>
         <h1>Bienvenue</h1>
