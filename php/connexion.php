@@ -6,7 +6,6 @@
     <title>Connexion - Yakadanse</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="../js/main.js"></script>
-    <link rel="stylesheet" href="../css/connexion.css">
     <link rel="stylesheet" href="../css/main.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,7 +14,9 @@
     
 </head>
 <body>
+    
     <?php require '../include/navbar.html'; ?>
+    <section class="extra-space"></section>
     <main class="container mx-auto px-4 py-8 mt-10">
         <div class="max-w-md mx-auto bg-white rounded-lg shadow-md p-8">
             <h1 class="text-black text-2xl font-bold text-center mb-6">Connexion</h1>

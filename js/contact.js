@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Vérifie si nous sommes sur la page de connexion
-    if (window.location.pathname.includes('connexion')) {
+    if (window.location.pathname.includes('Formulairecontact')) {
         // Tableau des images de fond possibles
         const backgrounds = [
             '../images/gradiant.png',
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
             // Nettoie l'ancien fond après la transition
             setTimeout(() => {
-                document.body.style.backgroundImage = `url(${randomBackground})`;
+                document.body.style.setProperty('background-image', `url(${randomBackground})`, 'important');
                 tempDiv.remove();
             }, 800);
         }
