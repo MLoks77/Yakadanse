@@ -14,6 +14,7 @@
 </head>
 <body>
 <?php require 'includeindex/navbar.html'; ?>
+<?php require 'includeindex/indexhero.html'; ?>
 
     <main>
         <h1>Bienvenue</h1>

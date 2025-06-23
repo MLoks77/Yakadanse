@@ -14,6 +14,7 @@
 </head>
 <body>
 <?php require '../include/navbar.html'; ?>
+<?php require '../include/galahero.html'; ?>
 
     <main>
         <h1>Bienvenue</h1>
