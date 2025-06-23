@@ -14,7 +14,7 @@
 </head>
 <body>
 <?php require '../include/navbar.html'; ?>
-<?php require '../include/associationhero.html'; ?>
+<?php require '../hero/associationhero.html'; ?>
 
     <main>
         <h1>Bienvenue</h1>
