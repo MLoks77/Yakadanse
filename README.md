@@ -87,15 +87,8 @@ Yakadanse/
 - **Google Fonts** (Funnel Display, Didact Gothic, etc.)
 - **Images optimisées** (WebP, AVIF, JPG)
 
-## Contribuer
-Les contributions sont les bienvenues !
-- Forkez le projet
-- Créez une branche (`git checkout -b feature/ma-feature`)
-- Commitez vos modifications (`git commit -am 'Ajout d'une fonctionnalité'`)
-- Poussez la branche (`git push origin feature/ma-feature`)
-- Ouvrez une Pull Request
-
 ## Contact
+- **dev mail** : maximederenes@gmail.com
 - **Mail** : associationyakadanse@gmail.com
 - **Facebook** : [Yakadanse Saint-Pathus](https://www.facebook.com/yakadanse.stpathus/)
 - **Instagram** : [@ykads](https://www.instagram.com/ykads/)
