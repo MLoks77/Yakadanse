@@ -1,0 +1,496 @@
+/* Styles spécifiques pour la page d'accueil Yakadanse */
+
+/* Animations d'entrée */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Classes d'animation */
+.animate-fade-in-up {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.animate-fade-in-left {
+    animation: fadeInLeft 0.8s ease-out;
+}
+
+.animate-fade-in-right {
+    animation: fadeInRight 0.8s ease-out;
+}
+
+/* Effet de survol pour les cartes */
+.card-hover {
+    transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Gradient animé pour les titres */
+.gradient-text {
+    background: linear-gradient(45deg, #ec4899, #8b5cf6, #3b82f6);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: gradientShift 3s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+    0%, 100% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+/* Effet de brillance sur les boutons */
+.shine-effect {
+    position: relative;
+    overflow: hidden;
+}
+
+.shine-effect::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.5s;
+}
+
+.shine-effect:hover::before {
+    left: 100%;
+}
+
+/* Styles pour les sections */
+.section-divider {
+    position: relative;
+    height: 4px;
+    background: linear-gradient(90deg, #ec4899, #8b5cf6, #3b82f6);
+    margin: 2rem 0;
+}
+
+/* Effet de parallaxe pour les images de fond */
+.parallax-bg {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* Styles pour les témoignages */
+.testimonial-card {
+    position: relative;
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 2rem;
+    transition: all 0.3s ease;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+    border-color: #ec4899;
+}
+
+.testimonial-card::before {
+    content: '"';
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    font-size: 4rem;
+    color: #ec4899;
+    font-family: serif;
+    line-height: 1;
+}
+
+/* Styles pour les statistiques */
+.stats-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 16px;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.stats-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 20px 40px rgba(102, 126, 234, 0.4);
+}
+
+/* Animation pour les icônes */
+.icon-bounce {
+    animation: iconBounce 2s infinite;
+}
+
+@keyframes iconBounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+/* Styles pour les badges */
+.badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.badge-primary {
+    background-color: #ec4899;
+    color: white;
+}
+
+.badge-secondary {
+    background-color: #8b5cf6;
+    color: white;
+}
+
+.badge-success {
+    background-color: #10b981;
+    color: white;
+}
+
+/* Effet de focus pour l'accessibilité */
+.focus-ring:focus {
+    outline: 2px solid #ec4899;
+    outline-offset: 2px;
+}
+
+/* Styles pour les images */
+.image-hover {
+    transition: all 0.3s ease;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.image-hover:hover {
+    transform: scale(1.05);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Styles pour les listes */
+.feature-list {
+    list-style: none;
+    padding: 0;
+}
+
+.feature-list li {
+    position: relative;
+    padding-left: 2rem;
+    margin-bottom: 0.75rem;
+}
+
+.feature-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #10b981;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+/* Styles pour les sections avec fond dégradé */
+.gradient-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.gradient-section-alt {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .animate-fade-in-left,
+    .animate-fade-in-right {
+        animation: fadeInUp 0.8s ease-out;
+    }
+    
+    .parallax-bg {
+        background-attachment: scroll;
+    }
+    
+    .testimonial-card::before {
+        font-size: 3rem;
+        top: -5px;
+    }
+}
+
+/* Styles pour les boutons d'action */
+.cta-button {
+    background: linear-gradient(45deg, #ec4899, #8b5cf6);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(236, 72, 153, 0.4);
+    color: white;
+}
+
+.cta-button:active {
+    transform: translateY(0);
+}
+
+/* Styles pour les cartes de discipline */
+.discipline-card {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.discipline-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    border-color: #ec4899;
+}
+
+/* Styles pour les sections d'événements */
+.event-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 20px;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.event-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s;
+}
+
+.event-card:hover::before {
+    transform: translateX(100%);
+}
+
+/* Styles pour les horaires */
+.schedule-item {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.schedule-item:hover {
+    transform: translateX(10px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Styles pour les coordonnées */
+.contact-info {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    border-radius: 20px;
+    padding: 2rem;
+    text-align: center;
+}
+
+.contact-info a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.contact-info a:hover {
+    text-decoration: underline;
+}
+
+/* Styles pour les photos de profil des professeurs */
+.professor-photo {
+    transition: all 0.3s ease;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+}
+
+.professor-photo:hover {
+    transform: scale(1.05);
+    border-color: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.professor-card {
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.professor-card:hover {
+    transform: translateY(-5px);
+    background-color: rgba(255, 255, 255, 0.25);
+}
+
+.professor-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s;
+}
+
+.professor-card:hover::before {
+    left: 100%;
+}
+
+/* Animation pour l'apparition des cartes professeurs */
+.professor-card {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.professor-card:nth-child(1) { animation-delay: 0.1s; }
+.professor-card:nth-child(2) { animation-delay: 0.2s; }
+.professor-card:nth-child(3) { animation-delay: 0.3s; }
+.professor-card:nth-child(4) { animation-delay: 0.4s; }
+.professor-card:nth-child(5) { animation-delay: 0.5s; }
+
+/* Style pour l'icône de placeholder */
+.professor-placeholder {
+    transition: all 0.3s ease;
+}
+
+.professor-card:hover .professor-placeholder {
+    transform: scale(1.1);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Responsive pour les photos de profil */
+@media (max-width: 768px) {
+    .professor-photo {
+        width: 16px;
+        height: 16px;
+    }
+    
+    .professor-card {
+        padding: 1rem;
+    }
+}
+
+/* Styles pour les images des professeurs */
+.professor-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.professor-image:hover {
+    filter: brightness(1.1);
+    transform: scale(1.05);
+}
+
+/* Effet de focus pour l'accessibilité */
+.professor-card:focus-within {
+    outline: 2px solid rgba(255, 255, 255, 0.8);
+    outline-offset: 2px;
+}
+
+/* Animation de chargement pour les images */
+@keyframes imageLoad {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.professor-image.loaded {
+    animation: imageLoad 0.5s ease-out;
+}
+
+/* Photo de profil simple pour la section équipe */
+.professor-image-simple {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    object-position: top center;
+    border-radius: 50%;
+    display: block;
+    background: #f3f4f6;
+    border: 2px solid #e5e7eb;
+}
+
+/* Responsive pour les photos de profil */
+@media (max-width: 768px) {
+    .professor-image-simple {
+        width: 80px;
+        height: 80px;
+    }
+} 

@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="css/main.css">
-    <script src="js/main.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/accueil.css">
 
-    <meta></meta>
+    <meta name="description" content="Yakadanse - Club de danse à Saint-Pathus. Découvrez nos cours de danse, nos spectacles et rejoignez notre communauté passionnée.">
+    <meta name="keywords" content="danse, club, Saint-Pathus, cours, gala, association, Yakadanse">
 
-    <title>Accueil</title>
+    <title>Yakadanse - Gala</title>
 </head>
 <body>
 <?php require '../include/navbar.html'; ?>
@@ -25,5 +25,10 @@
     </main>
 
 <?php require '../include/footer.html'; ?>
+
+
+    <script src="../js/main.js"></script>
+    <script src="../js/accueil.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </body>
 </html>

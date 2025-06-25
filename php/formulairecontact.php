@@ -3,11 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../js/contact.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
-
-    <title>Contact</title>
+    <title>Yakadanse - Contact</title>
 </head>
 <body>
 <?php require '../include/navbar.html'; ?>
@@ -47,5 +44,9 @@
     </main>
 
 <?php require '../include/footer.html'; ?>
+
+<script src="../js/contact.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
 </body>
 </html>
