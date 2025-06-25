@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <link rel="icon" type="image/png" href="images/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="images/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="images/favicon//favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Yakadanse" />
+    <link rel="manifest" href="images/favicon/site.webmanifest" />
+
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/accueil.css">
 
@@ -181,85 +188,142 @@
                 <div class="text-center mb-12 animate-fade-in-up">
                     <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4 funnel-display">Nos Événements</h2>
                     <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-                        Découvrez notre spectacle annuel et nos événements
+                        Découvrez notre spectacle annuel
                     </p>
                 </div>
 
-                <div class="flex justify-center">
-                    <div class="event-card animate-fade-in-up max-w-2xl">
-                        <h3 class="text-2xl font-bold mb-4">Gala de Juin</h3>
-                        <p class="mb-4">Le spectacle incontournable de l'année où tous nos élèves montrent leur talent sur scène.</p>
-                        <ul class="space-y-2 mb-6">
-                            <li>• Chorégraphies originales</li>
-                            <li>• Costumes magnifiques</li>
-                            <li>• Ambiance festive</li>
-                            <li>• Équipe technique professionnelle</li>
-                        </ul>
-                        <a href="php/gala.php" class="cta-button shine-effect focus-ring">
-                            En savoir plus
-                        </a>
+            <section class="py-16">
+                <div class="container mx-auto px-6 max-w-6xl flex flex-col md:flex-row items-center gap-12">
+                    <!-- Texte à gauche -->
+                    <div class="md:w-1/2 w-full mb-8 md:mb-0">
+                        <h3 class="text-2xl md:text-3xl font-bold text-gray-800 mb-4 funnel-display">Gala de Juin</h3>
+                        <p class="text-lg text-gray-700 mb-6">
+                            Chaque année, les professeurs de Yakadanse accompagnent et préparent nos danseuses tout au long de la saison en vue du gala de fin d'année. Pour plus d'informations, rendez-vous sur la page dédiée.
+                        </p>
+<button>
+<a href="php/gala.php" class="flex justify-center gap-2 items-center mx-auto shadow-xl text-lg bg-pink-400 hover:bg-pink-600 transition-colors duration-300 text-white lg:font-semibold isolation-auto border-pink-400 hover:border-pink-600 before:absolute before:w-full before:transition-all before:duration-700 before:hover:w-full before:-left-full before:hover:left-0 before:rounded-full before:bg-pink-500 hover:text-white before:-z-10 before:aspect-square before:hover:scale-150 before:hover:duration-700 relative z-10 px-4 py-2 overflow-hidden border-2 rounded-full group" style="text-decoration: none;">
+    Découvrir
+    <svg
+      class="w-8 h-8 justify-end group-hover:rotate-90 group-hover:bg-pink-50 text-pink-50 ease-linear duration-300 rounded-full border border-pink-600 group-hover:border-none p-2 rotate-45"
+      viewBox="0 0 16 19"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M7 18C7 18.5523 7.44772 19 8 19C8.55228 19 9 18.5523 9 18H7ZM8.70711 0.292893C8.31658 -0.0976311 7.68342 -0.0976311 7.29289 0.292893L0.928932 6.65685C0.538408 7.04738 0.538408 7.68054 0.928932 8.07107C1.31946 8.46159 1.95262 8.46159 2.34315 8.07107L8 2.41421L13.6569 8.07107C14.0474 8.46159 14.6805 8.46159 15.0711 8.07107C15.4616 7.68054 15.4616 7.04738 15.0711 6.65685L8.70711 0.292893ZM9 18L9 1H7L7 18H9Z"
+        class="fill-white group-hover:fill-pink-600"
+      ></path>
+    </svg>
+</a>
+</button>
+    </div>
+                    <div class="md:w-1/2 w-full flex justify-center">
+                        <div id="animation-carousel" class="relative w-full" data-carousel="static">
+                            <!-- Carousel wrapper -->
+                            <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+                                 <!-- Item 1 -->
+                                <div class="hidden duration-200 ease-linear" data-carousel-item>
+                                    <img src="images/groupe5.jpg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="Groupe de danseurs">
+                                </div>
+                                <!-- Item 2 -->
+                                <div class="hidden duration-200 ease-linear" data-carousel-item>
+                                    <img src="images/final.jpg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="Final du gala">
+                                </div>
+                                <!-- Item 3 -->
+                                <div class="hidden duration-200 ease-linear" data-carousel-item="active">
+                                    <img src="images/groupe.jpg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="Groupe de danseurs">
+                                </div>
+                                <!-- Item 4 -->
+                                <div class="hidden duration-200 ease-linear" data-carousel-item>
+                                    <img src="images/groupe2.jpg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="Groupe de danseurs">
+                                </div>
+                                <!-- Item 5 -->
+                                <div class="hidden duration-200 ease-linear" data-carousel-item>
+                                    <img src="images/groupe3.jpg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="Groupe de danseurs">
+                                </div>
+                                 <!-- Item 6 -->
+                                <div class="hidden duration-200 ease-linear" data-carousel-item>
+                                    <img src="images/groupe4.jpg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="Groupe de danseurs">
+                                </div>
+                            </div>
+                            <!-- Slider controls -->
+                            <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
+                                <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-white-800/30 group-hover:bg-white/50 dark:group-hover:bg-white-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                                    <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+                                    </svg>
+                                    <span class="sr-only">Précédente</span>
+                                </span>
+                            </button>
+                            <button type="button" class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
+                                <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-white-800/30 group-hover:bg-white/50 dark:group-hover:bg-white-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                                    <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+                                    </svg>
+                                    <span class="sr-only">Prochaine</span>
+                                </span>
+                            </button>
+                        </div>
                     </div>
                 </div>
+            </section>
+
             </div>
         </section>
-    <!--
-       Section Témoignages
+    
+      
         <section class="py-16 bg-gradient-to-br from-pink-50 to-purple-50">
             <div class="container mx-auto px-6 max-w-6xl">
                 <div class="text-center mb-12 animate-fade-in-up">
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4 funnel-display">Ils nous font confiance</h2>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4 funnel-display">Nous retrouver</h2>
                     <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-                        Découvrez ce que nos élèves et leurs parents pensent de Yakadanse
+                        Retrouvez Yakadanse à l'adresse suivante :<br>
+                        <span class="font-semibold">77178 Saint-Pathus, France</span><br>
                     </p>
                 </div>
-
-                <div class="grid md:grid-cols-3 gap-8">
-                    <div class="testimonial-card animate-fade-in-left">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 bg-pink-200 rounded-full flex items-center justify-center mr-4">
-                                <span class="text-pink-600 font-bold">L</span>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-gray-800">Lucie, 12 ans</h4>
-                                <p class="text-gray-600 text-sm">Élève depuis 5 ans</p>
-                            </div>
-                        </div>
-                        <p class="text-gray-700 italic">"J'adore venir à Yakadanse ! Les professeurs sont super gentils et j'ai appris tellement de choses. Le gala de fin d'année est toujours magique !"</p>
-                    </div>
-
-                    <div class="testimonial-card animate-fade-in-up">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 bg-purple-200 rounded-full flex items-center justify-center mr-4">
-                                <span class="text-purple-600 font-bold">M</span>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-gray-800">Marie, maman de Emma</h4>
-                                <p class="text-gray-600 text-sm">Parent d'élève</p>
-                            </div>
-                        </div>
-                        <p class="text-gray-700 italic">"Ma fille est épanouie depuis qu'elle fait de la danse ici. L'équipe est professionnelle et bienveillante. Je recommande vivement !"</p>
-                    </div>
-
-                    <div class="testimonial-card animate-fade-in-right">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 bg-blue-200 rounded-full flex items-center justify-center mr-4">
-                                <span class="text-blue-600 font-bold">T</span>
-                            </div>
-                            <div>
-                                <h4 class="font-bold text-gray-800">Thomas, 25 ans</h4>
-                                <p class="text-gray-600 text-sm">Cours adultes</p>
-                            </div>
-                        </div>
-                        <p class="text-gray-700 italic">"En tant qu'adulte débutant, j'ai trouvé ici un accueil parfait. Les cours sont adaptés et l'ambiance est très conviviale."</p>
+                <div class="flex justify-center">
+                    <div class="w-full md:w-3/4 lg:w-2/3 rounded-lg overflow-hidden shadow-lg">
+                        <iframe 
+                            src="https://www.google.com/maps?q=49.07136666617248,2.798486328527565&output=embed"
+                            width="100%" 
+                            height="400" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade"
+                        ></iframe>
                     </div>
                 </div>
             </div>
         </section>
-    </main>-->
+
+    <button id="backToTop" title="Retour en haut" class="fixed bottom-8 right-8 z-50 bg-pink-600 text-white rounded-full p-3 shadow-lg hover:bg-pink-700 transition-all duration-300 hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 m-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/>
+        </svg>
+    </button>
+    </main>
 <script src="js/main.js"></script>
 <script src="js/accueil.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.4.1/flowbite.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 <?php require 'includeindex/footer.html'; ?>
 
 </body>
 </html>
+
+<script>
+// Afficher/Masquer le bouton selon le scroll
+window.addEventListener('scroll', function() {
+    const btn = document.getElementById('backToTop');
+    if (window.scrollY > 300) {
+        btn.classList.remove('hidden');
+    } else {
+        btn.classList.add('hidden');
+    }
+});
+
+// Scroll smooth vers le haut
+document.getElementById('backToTop').addEventListener('click', function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+</script>
