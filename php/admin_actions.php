@@ -107,7 +107,7 @@ function getReservations($pdo) {
                 FROM reservation r 
                 LEFT JOIN status s ON r.id_status = s.id_status 
                 WHERE r.id_status IS NULL OR s.valeur_status = 0
-                ORDER BY r.date_reservation DESC
+                ORDER BY r.date_reservation DESC, r.ID_reservation DESC
                 LIMIT :limit OFFSET :offset
             ");
             $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
@@ -147,7 +147,7 @@ function getReservations($pdo) {
                 FROM reservation r 
                 LEFT JOIN status s ON r.id_status = s.id_status 
                 WHERE s.valeur_status = 1
-                ORDER BY r.date_reservation DESC
+                ORDER BY r.date_reservation DESC, r.ID_reservation DESC
                 LIMIT :limit OFFSET :offset
             ");
             $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
