@@ -91,7 +91,7 @@ INSERT INTO `prix` (`id_prix`, `type_prix`, `montant`, `description`, `date_crea
 --
 
 CREATE TABLE `reservation` (
-  `ID_reservation` int(11) NOT NULL,
+  `ID_reservation` int(11) NOT NULL AUTO_INCREMENT,
   `prenom` varchar(100) NOT NULL,
   `nom` varchar(100) NOT NULL,
   `mail` varchar(255) NOT NULL,
@@ -102,7 +102,8 @@ CREATE TABLE `reservation` (
   `id_status` int(11) DEFAULT NULL,
   `collectedonnee` text DEFAULT NULL,
   `date_reservation` timestamp NOT NULL DEFAULT current_timestamp(),
-  `date_modification` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+  `date_modification` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`ID_reservation`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --

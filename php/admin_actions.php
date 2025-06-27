@@ -215,30 +215,27 @@ function testConnection($pdo) {
 // Fonction pour accepter une réservation
 function acceptReservation($pdo) {
     $id = $_POST['id'] ?? null;
-    
     if (!$id) {
         echo json_encode(['success' => false, 'message' => 'ID de réservation manquant']);
         return;
     }
-    
+    if (!is_numeric($id)) {
+        echo json_encode(['success' => false, 'message' => 'ID de réservation invalide', 'debug' => $id]);
+        return;
+    }
     try {
-        // Récupérer l'ID du statut "Confirmé"
         $stmt = $pdo->prepare("SELECT id_status FROM status WHERE nom_status = 'Confirmé' LIMIT 1");
         $stmt->execute();
         $status = $stmt->fetch(PDO::FETCH_ASSOC);
-        
         if (!$status) {
             echo json_encode(['success' => false, 'message' => 'Statut "Confirmé" non trouvé']);
             return;
         }
-        
-        // Mettre à jour la réservation
         $stmt = $pdo->prepare("UPDATE reservation SET id_status = ? WHERE ID_reservation = ?");
         $stmt->execute([$status['id_status'], $id]);
-        
         echo json_encode(['success' => true, 'message' => 'Réservation acceptée']);
     } catch(PDOException $e) {
-        echo json_encode(['success' => false, 'message' => 'Erreur lors de l\'acceptation de la réservation']);
+        echo json_encode(['success' => false, 'message' => 'Erreur lors de l\'acceptation de la réservation', 'debug' => $e->getMessage()]);
     }
 }
 

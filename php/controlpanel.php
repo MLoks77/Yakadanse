@@ -172,16 +172,16 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
                             <thead class="bg-gray-50 sticky top-0">
                                 <tr>
                                     <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Client</th>
-                                    <th class="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Places</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Places</th>
                                     <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Prix</th>
                                     <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Horaire</th>
-                                    <th class="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Données</th>
-                                    <th class="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Données</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                                 </tr>
                             </thead>
                             <tbody id="reservations-tbody" class="bg-white divide-y divide-gray-200">
                                 <tr>
-                                    <td colspan="5" class="text-center py-8 text-gray-500">
+                                    <td colspan="6" class="text-center py-8 text-gray-500">
                                         <div class="spinner mx-auto"></div>
                                         <p class="mt-2">Chargement des réservations...</p>
                                     </td>
@@ -202,16 +202,16 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
                             <thead class="bg-gray-50 sticky top-0">
                                 <tr>
                                     <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Client</th>
-                                    <th class="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Places</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Places</th>
                                     <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Prix</th>
                                     <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Horaire</th>
-                                    <th class="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Données</th>
-                                    <th class="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Données</th>
+                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                                 </tr>
                             </thead>
                             <tbody id="accepted-reservations-tbody" class="bg-white divide-y divide-gray-200">
                                 <tr>
-                                    <td colspan="5" class="text-center py-8 text-gray-500">
+                                    <td colspan="6" class="text-center py-8 text-gray-500">
                                         <div class="spinner mx-auto"></div>
                                         <p class="mt-2">Chargement des réservations...</p>
                                     </td>
