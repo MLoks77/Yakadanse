@@ -117,6 +117,66 @@
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
+/* Styles pour les tableaux de réservations */
+.reservation-table {
+    border-collapse: collapse;
+}
+
+.reservation-table th {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: #f9fafb;
+    border-bottom: 2px solid #e5e7eb;
+}
+
+.reservation-table td {
+    vertical-align: top;
+    padding: 0.75rem 1rem;
+}
+
+/* Styles pour les informations client */
+.client-info {
+    line-height: 1.4;
+}
+
+.client-info .name {
+    font-weight: 600;
+    color: #111827;
+}
+
+.client-info .email {
+    color: #6b7280;
+    font-size: 0.75rem;
+}
+
+.client-info .date {
+    color: #9ca3af;
+    font-size: 0.75rem;
+}
+
+/* Styles pour les places */
+.places-info {
+    text-align: center;
+}
+
+.places-info .total {
+    font-weight: 600;
+    color: #111827;
+    font-size: 1.1rem;
+}
+
+.places-info .detail {
+    color: #6b7280;
+    font-size: 0.75rem;
+}
+
+/* Styles pour les prix */
+.price-info {
+    font-weight: 600;
+    color: #059669;
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
     .table-container {
@@ -126,5 +186,73 @@
     .action-btn {
         padding: 0.5rem;
         font-size: 0.75rem;
+    }
+    
+    .reservation-table th,
+    .reservation-table td {
+        padding: 0.5rem 0.75rem;
+    }
+}
+
+/* Styles pour la pagination */
+.pagination-controls {
+    background-color: #f9fafb;
+    border-top: 1px solid #e5e7eb;
+}
+
+.pagination-controls button {
+    transition: all 0.2s ease;
+}
+
+.pagination-controls button:hover:not(:disabled) {
+    background-color: #f3f4f6;
+    transform: translateY(-1px);
+}
+
+.pagination-controls button:disabled {
+    cursor: not-allowed;
+}
+
+.pagination-controls select {
+    transition: all 0.2s ease;
+}
+
+.pagination-controls select:hover {
+    border-color: #3b82f6;
+}
+
+.pagination-controls select:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+/* Animation pour les changements de page */
+.table-row {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive design pour la pagination */
+@media (max-width: 768px) {
+    .pagination-controls {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+    
+    .pagination-controls > div {
+        width: 100%;
+        justify-content: center;
     }
 }

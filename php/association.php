@@ -20,7 +20,7 @@
     <title>L'association</title>
 </head>
 <body>
-<?php require '../include/navbar.html'; ?>
+<?php require '../include/navbar.php'; ?>
 <?php require '../hero/associationhero.html'; ?>
 
     <main class="min-h-screen py-16">

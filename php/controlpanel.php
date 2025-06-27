@@ -1,3 +1,12 @@
+<?php
+session_start();
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
+    header('Location: ../index.php');
+    exit;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -19,7 +28,7 @@
     <title>Yakadanse - Panneau d'Administration</title>
 </head>
 <body class="bg-gray-50">
-<?php require '../include/navbar.html'; ?>
+<?php require '../include/navbar.php'; ?>
 <?php require '../hero/panel.html'; ?>
     <main class="min-h-screen py-8">
         <!-- En-tête du panneau -->
@@ -27,12 +36,12 @@
             <div class="mb-8 flex justify-between items-start">
                 <div>
                     <h1 class="text-3xl font-bold text-gray-900 mb-2">Panneau d'Administration</h1>
-                    <p class="text-gray-600">Gérez les réservations, le formulaire du gala</p>
+                    <p class="text-gray-600">Gérez les réservations, le formulaire du gala, et les prix des tickets</p>
                 </div>
                 
                 <!-- Bouton de déconnexion -->
                 <div class="flex items-center space-x-3">
-                    <span class="text-sm text-gray-500">Connecté en tant qu'administrateur</span>
+                    <span class="text-sm text-gray-500">Connecté</span>
                     <a href="../configdb/logout.php" class="inline-flex items-center px-4 py-2 bg-red-500 hover:bg-red-600 text-white text-sm font-medium rounded-lg transition-all duration-200 shadow-sm hover:shadow-md">
                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
@@ -126,21 +135,24 @@
 
                 <!-- Actions de masse -->
                 <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Actions de masse</h3>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Supprimer les données</h3>
                     <div class="space-y-3">
                         <button class="btn-clear-all w-full bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200">
                             Vider toutes les réservations
                         </button>
-                        <p class="text-xs text-gray-500">⚠️ Cette action est irréversible</p>
+                        <p class="text-xs text-gray-500">⚠️ Cette action est irréversible, veuillez vider la base de donnée après chaque gala afin de respecter les mentions légales établis.</p>
                     </div>
                 </div>
 
                 <!-- Actualisation -->
                 <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Actualisation</h3>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Base de donnée</h3>
                     <div class="space-y-3">
                         <button onclick="loadReservations()" class="w-full bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200">
                             Actualiser les données
+                        </button>
+                        <button onclick="testConnection()" class="w-full bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200">
+                            Test Connexion DB
                         </button>
                         <p class="text-xs text-gray-500">Recharge les données depuis la base</p>
                     </div>
@@ -150,28 +162,25 @@
             <!-- Tableaux des réservations -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <!-- Réservations en attente -->
-                <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+                <div id="reservations-container" class="bg-white rounded-lg shadow-sm border border-gray-200">
                     <div class="px-6 py-4 border-b border-gray-200">
                         <h3 class="text-lg font-semibold text-gray-900">Réservations en attente</h3>
                         <p class="text-sm text-gray-600">Nouvelles demandes de réservation</p>
                     </div>
-                    <div class="table-container overflow-x-auto">
+                    <div class="overflow-y-auto max-h-96">
                         <table class="min-w-full divide-y divide-gray-200">
-                            <thead class="bg-gray-50">
+                            <thead class="bg-gray-50 sticky top-0">
                                 <tr>
                                     <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Client</th>
-                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-                                    <th class="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Adultes</th>
-                                    <th class="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Enfants</th>
+                                    <th class="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Places</th>
                                     <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Prix</th>
                                     <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Horaire</th>
-                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
                                     <th class="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                                 </tr>
                             </thead>
                             <tbody id="reservations-tbody" class="bg-white divide-y divide-gray-200">
                                 <tr>
-                                    <td colspan="8" class="text-center py-8 text-gray-500">
+                                    <td colspan="5" class="text-center py-8 text-gray-500">
                                         <div class="spinner mx-auto"></div>
                                         <p class="mt-2">Chargement des réservations...</p>
                                     </td>
@@ -182,28 +191,25 @@
                 </div>
 
                 <!-- Réservations acceptées -->
-                <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+                <div id="accepted-reservations-container" class="bg-white rounded-lg shadow-sm border border-gray-200">
                     <div class="px-6 py-4 border-b border-gray-200">
                         <h3 class="text-lg font-semibold text-gray-900">Réservations acceptées</h3>
                         <p class="text-sm text-gray-600">Réservations confirmées</p>
                     </div>
-                    <div class="table-container overflow-x-auto">
+                    <div class="overflow-y-auto max-h-96">
                         <table class="min-w-full divide-y divide-gray-200">
-                            <thead class="bg-gray-50">
+                            <thead class="bg-gray-50 sticky top-0">
                                 <tr>
                                     <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Client</th>
-                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-                                    <th class="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Adultes</th>
-                                    <th class="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Enfants</th>
+                                    <th class="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Places</th>
                                     <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Prix</th>
                                     <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Horaire</th>
-                                    <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
                                     <th class="px-4 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                                 </tr>
                             </thead>
                             <tbody id="accepted-reservations-tbody" class="bg-white divide-y divide-gray-200">
                                 <tr>
-                                    <td colspan="8" class="text-center py-8 text-gray-500">
+                                    <td colspan="5" class="text-center py-8 text-gray-500">
                                         <div class="spinner mx-auto"></div>
                                         <p class="mt-2">Chargement des réservations...</p>
                                     </td>

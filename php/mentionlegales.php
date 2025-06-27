@@ -17,7 +17,7 @@
     <title>Accueil</title>
 </head>
 <body>
-<?php require '../include/navbar.html'; ?>
+<?php require '../include/navbar.php'; ?>
 
     <main>
         <h1>Bienvenue</h1>

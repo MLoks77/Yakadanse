@@ -20,7 +20,7 @@
     <title>S'inscrire au gala</title>
 </head>
 <body>
-<?php require '../include/navbar.html'; ?>
+<?php require '../include/navbar.php'; ?>
 <?php require '../hero/associationhero.html'; ?>
 
 <main></main>

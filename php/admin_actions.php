@@ -2,19 +2,7 @@
 // Fichier pour gérer les actions AJAX du panneau d'administration
 header('Content-Type: application/json');
 
-// Configuration de la base de données
-$host = 'localhost';
-$dbname = 'yakadanse';
-$username = 'root';
-$password = '';
-
-try {
-    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch(PDOException $e) {
-    echo json_encode(['success' => false, 'message' => 'Erreur de connexion à la base de données']);
-    exit;
-}
+require_once '../configdb/setup.php';
 
 // Récupération de l'action demandée
 $action = $_GET['action'] ?? $_POST['action'] ?? '';
@@ -22,6 +10,9 @@ $action = $_GET['action'] ?? $_POST['action'] ?? '';
 switch($action) {
     case 'get_reservations':
         getReservations($pdo);
+        break;
+    case 'test_connection':
+        testConnection($pdo);
         break;
     case 'accept_reservation':
         acceptReservation($pdo);
@@ -51,35 +42,118 @@ switch($action) {
 // Fonction pour récupérer les réservations
 function getReservations($pdo) {
     try {
-        // Réservations en attente (sans statut ou avec statut "En attente")
+        // Paramètres de pagination
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 10;
+        $offset = ($page - 1) * $limit;
+        
+        // Compter le total des réservations en attente
+        $stmt = $pdo->prepare("
+            SELECT COUNT(*) as total 
+            FROM reservation r 
+            LEFT JOIN status s ON r.id_status = s.id_status 
+            WHERE r.id_status IS NULL OR s.valeur_status = 0
+        ");
+        $stmt->execute();
+        $totalPending = $stmt->fetch(PDO::FETCH_ASSOC)['total'];
+        
+        // Compter le total des réservations acceptées
+        $stmt = $pdo->prepare("
+            SELECT COUNT(*) as total 
+            FROM reservation r 
+            LEFT JOIN status s ON r.id_status = s.id_status 
+            WHERE s.valeur_status = 1
+        ");
+        $stmt->execute();
+        $totalAccepted = $stmt->fetch(PDO::FETCH_ASSOC)['total'];
+        
+        // Réservations en attente avec pagination
         $stmt = $pdo->prepare("
             SELECT r.*, s.nom_status 
             FROM reservation r 
             LEFT JOIN status s ON r.id_status = s.id_status 
             WHERE r.id_status IS NULL OR s.valeur_status = 0
             ORDER BY r.date_reservation DESC
+            LIMIT :limit OFFSET :offset
         ");
+        $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+        $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
         $stmt->execute();
         $reservations = $stmt->fetchAll(PDO::FETCH_ASSOC);
         
-        // Réservations acceptées
+        // Réservations acceptées avec pagination
         $stmt = $pdo->prepare("
             SELECT r.*, s.nom_status 
             FROM reservation r 
             LEFT JOIN status s ON r.id_status = s.id_status 
             WHERE s.valeur_status = 1
             ORDER BY r.date_reservation DESC
+            LIMIT :limit OFFSET :offset
         ");
+        $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+        $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
         $stmt->execute();
         $accepted_reservations = $stmt->fetchAll(PDO::FETCH_ASSOC);
         
-        echo json_encode([
+        // Calculer les informations de pagination
+        $totalPagesPending = ceil($totalPending / $limit);
+        $totalPagesAccepted = ceil($totalAccepted / $limit);
+        
+        $response = [
             'success' => true,
             'reservations' => $reservations,
-            'accepted_reservations' => $accepted_reservations
+            'accepted_reservations' => $accepted_reservations,
+            'pagination' => [
+                'current_page' => $page,
+                'limit' => $limit,
+                'total_pending' => $totalPending,
+                'total_accepted' => $totalAccepted,
+                'total_pages_pending' => $totalPagesPending,
+                'total_pages_accepted' => $totalPagesAccepted,
+                'has_prev_pending' => $page > 1,
+                'has_next_pending' => $page < $totalPagesPending,
+                'has_prev_accepted' => $page > 1,
+                'has_next_accepted' => $page < $totalPagesAccepted
+            ]
+        ];
+        
+        echo json_encode($response);
+        
+    } catch(PDOException $e) {
+        error_log("Erreur SQL: " . $e->getMessage());
+        echo json_encode([
+            'success' => false, 
+            'message' => 'Erreur lors de la récupération des réservations',
+            'debug' => $e->getMessage()
+        ]);
+    } catch(Exception $e) {
+        error_log("Erreur générale: " . $e->getMessage());
+        echo json_encode([
+            'success' => false, 
+            'message' => 'Erreur générale',
+            'debug' => $e->getMessage()
+        ]);
+    }
+}
+
+// Fonction de test de connexion
+function testConnection($pdo) {
+    try {
+        $stmt = $pdo->prepare("SELECT COUNT(*) as total FROM reservation");
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        echo json_encode([
+            'success' => true,
+            'message' => 'Connexion OK',
+            'total_reservations' => $result['total']
         ]);
     } catch(PDOException $e) {
-        echo json_encode(['success' => false, 'message' => 'Erreur lors de la récupération des réservations']);
+        echo json_encode([
+            'success' => false,
+            'message' => 'Erreur de connexion',
+            'debug' => $e->getMessage()
+        ]);
     }
 }
 

@@ -1,32 +1,32 @@
 <?php
 session_start();
-include_once '../configdb/connexion.php';
-if (isset($_POST['envoyer'])) {
+
+require '../configdb/setup.php';
+
+if (isset($_POST['envoyer']) && isset($_POST['identifiant']) && isset($_POST['password'])) {
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $identifiant = $_POST['Identifiant'];
-        $mot_de_passe = $_POST['Mot_de_passe'];
+        $identifiant = $_POST['identifiant'];
+        $password = $_POST['password'];
 
         // Requête pour trouver l'utilisateur
-        $sql = "SELECT * FROM utilisateur WHERE Identifiant = :Identifiant";
+        $sql = "SELECT * FROM compte WHERE identifiant = :identifiant";
         $stmt = $pdo->prepare($sql);
-        $stmt->execute(['Identifiant' => $identifiant]);
-        $utilisateur = $stmt->fetch();
+        $stmt->execute(['identifiant' => $identifiant]);
+        $compte = $stmt->fetch();
 
-        if ($utilisateur && password_verify($mot_de_passe, $utilisateur['Mot_de_passe'])) {
+        if ($compte && password_verify($password, $compte['mot_de_passe'])) {
             // Connexion réussie
-            $_SESSION['utilisateur_id'] = $utilisateur['ID_utilisateur'];
-            $_SESSION['identifiant'] = $utilisateur['Identifiant'];
-            $_SESSION['role'] = $utilisateur['role'];
-            $_SESSION['nom'] = $utilisateur['Nom'];
-            $_SESSION['prenom'] = $utilisateur['Prenom'];
-            $_SESSION['Mail'] = $utilisateur['Mail'];
+            $_SESSION['ID_compte'] = $compte['ID_compte'];
+            $_SESSION['identifiant'] = $compte['identifiant'];
+            $_SESSION['role'] = $compte['role'];
 
-            echo "Connexion réussie !";
-            // Redirection vers une page protégée
+           
             header("Location: ../php/controlpanel.php");
             exit;
         } else {
-            header("Location: ../connexion.php?erreur=1");
+            header("Location: ../php/connexion.php?erreur=1");
+            exit;
         }
     }
 }
+?>

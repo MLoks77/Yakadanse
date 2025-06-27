@@ -20,7 +20,7 @@
     <title>Yakadanse - Saint-Pathus</title>
 </head>
 <body>
-<?php require 'includeindex/navbar.html'; ?>
+<?php require 'includeindex/navbar.php'; ?>
 <?php require 'includeindex/indexhero.html'; ?>
 
     <main class="min-h-screen bg-[#181F20]">

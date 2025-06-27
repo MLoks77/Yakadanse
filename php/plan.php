@@ -13,7 +13,7 @@
     <title>Yakadanse - Plan</title>
 </head>
 <body>
-<?php require '../include/navbar.html'; ?>
+<?php require '../include/navbar.php'; ?>
 <?php require '../hero/defaulthero.html'; ?>
 
 <section class="mt-8 mb-8">

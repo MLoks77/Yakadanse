@@ -20,7 +20,7 @@
     <title>Cours - Yakadanse</title>
 </head>
 <body class="bg-gray-50">
-<?php require '../include/navbar.html'; ?>
+<?php require '../include/navbar.php'; ?>
 <?php require '../hero/courshero.html'; ?>
 
     <main class="min-h-screen py-16">

@@ -20,7 +20,7 @@
     <title>Yakadanse - Gala</title>
 </head>
 <body>
-<?php require '../include/navbar.html'; ?>
+<?php require '../include/navbar.php'; ?>
 <?php require '../hero/galahero.html'; ?>
 
     <main>

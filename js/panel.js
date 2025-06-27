@@ -1,5 +1,9 @@
 // Panneau d'administration - JavaScript
 
+// Variables globales pour la pagination
+let currentPage = 1;
+let itemsPerPage = 10;
+
 document.addEventListener('DOMContentLoaded', function() {
     // Initialisation
     initializePanel();
@@ -37,20 +41,54 @@ function setupEventListeners() {
         if (e.target.classList.contains('btn-update-prix')) {
             handleUpdatePrix();
         }
-    });
-    
-    // Fermeture des modales
-    document.addEventListener('click', function(e) {
-        if (e.target.classList.contains('modal-backdrop') || e.target.classList.contains('btn-close-modal')) {
-            closeModal();
+        // Gestion de la pagination
+        if (e.target.classList.contains('btn-prev-page')) {
+            changePage(currentPage - 1);
+        }
+        if (e.target.classList.contains('btn-next-page')) {
+            changePage(currentPage + 1);
+        }
+        if (e.target.classList.contains('btn-page-number')) {
+            const page = parseInt(e.target.dataset.page);
+            changePage(page);
         }
     });
+}
+
+// Fonction pour changer de page
+function changePage(page) {
+    if (page < 1) return;
+    currentPage = page;
+    loadReservations();
+}
+
+// Fonction pour changer le nombre d'éléments par page
+function changeItemsPerPage(limit) {
+    itemsPerPage = limit;
+    currentPage = 1; // Retour à la première page
+    loadReservations();
+}
+
+// Fonction de test de connexion
+function testConnection() {
+    console.log('Test de connexion à la base de données...');
     
-    // Fermeture des notifications
-    document.addEventListener('click', function(e) {
-        if (e.target.classList.contains('btn-close-notification')) {
-            hideNotification();
+    fetch('admin_actions.php?action=test_connection')
+    .then(response => {
+        console.log('Réponse test:', response.status, response.statusText);
+        return response.json();
+    })
+    .then(data => {
+        console.log('Résultat test:', data);
+        if (data.success) {
+            showNotification(`Connexion OK - ${data.total_reservations} réservations trouvées`, 'success');
+        } else {
+            showNotification(`Erreur: ${data.message}`, 'error');
         }
+    })
+    .catch(error => {
+        console.error('Erreur test:', error);
+        showNotification('Erreur de connexion au serveur', 'error');
     });
 }
 
@@ -197,18 +235,29 @@ function handleUpdatePrix() {
 
 // Chargement des données
 function loadReservations() {
-    fetch('admin_actions.php?action=get_reservations')
-    .then(response => response.json())
+    console.log('Chargement des réservations...', { page: currentPage, limit: itemsPerPage });
+    
+    fetch(`admin_actions.php?action=get_reservations&page=${currentPage}&limit=${itemsPerPage}`)
+    .then(response => {
+        console.log('Réponse reçue:', response.status, response.statusText);
+        return response.json();
+    })
     .then(data => {
+        console.log('Données reçues:', data);
+        
         if (data.success) {
-            updateReservationsTable(data.reservations);
-            updateAcceptedReservationsTable(data.accepted_reservations);
-            updateCounters(data.reservations, data.accepted_reservations);
+            updateReservationsTable(data.reservations, data.pagination);
+            updateAcceptedReservationsTable(data.accepted_reservations, data.pagination);
+            updateCounters(data.pagination.total_pending, data.pagination.total_accepted);
+            updatePagination(data.pagination);
+        } else {
+            console.error('Erreur dans la réponse:', data);
+            showNotification(data.message || 'Erreur lors du chargement', 'error');
         }
     })
     .catch(error => {
-        console.error('Erreur:', error);
-        showNotification('Erreur lors du chargement des réservations', 'error');
+        console.error('Erreur de fetch:', error);
+        showNotification('Erreur de connexion au serveur', 'error');
     });
 }
 
@@ -240,35 +289,44 @@ function loadPrix() {
 }
 
 // Mise à jour des tableaux
-function updateReservationsTable(reservations) {
+function updateReservationsTable(reservations, pagination) {
     const tbody = document.getElementById('reservations-tbody');
     if (!tbody) return;
     
     tbody.innerHTML = '';
     
     if (reservations.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="8" class="text-center py-4 text-gray-500">Aucune réservation en attente</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="5" class="text-center py-4 text-gray-500">Aucune réservation en attente</td></tr>';
         return;
     }
     
     reservations.forEach(reservation => {
         const row = document.createElement('tr');
         row.className = 'table-row border-b border-gray-200 hover:bg-gray-50';
+        
+        // Calcul du total des places
+        const totalPlaces = parseInt(reservation.n_adulte) + parseInt(reservation.n_enfant);
+        const placesText = `${reservation.n_adulte}A ${reservation.n_enfant}E`;
+        
         row.innerHTML = `
-            <td class="px-4 py-3 text-sm">${reservation.prenom} ${reservation.nom}</td>
-            <td class="px-4 py-3 text-sm">${reservation.mail}</td>
-            <td class="px-4 py-3 text-sm text-center">${reservation.n_adulte}</td>
-            <td class="px-4 py-3 text-sm text-center">${reservation.n_enfant}</td>
-            <td class="px-4 py-3 text-sm font-medium">${reservation.prix}</td>
-            <td class="px-4 py-3 text-sm">${reservation.horaire}</td>
-            <td class="px-4 py-3 text-sm">${formatDate(reservation.date_reservation)}</td>
             <td class="px-4 py-3 text-sm">
-                <div class="flex space-x-2">
+                <div class="font-medium text-gray-900">${reservation.prenom} ${reservation.nom}</div>
+                <div class="text-gray-500 text-xs">${reservation.mail}</div>
+                <div class="text-gray-400 text-xs">${formatDate(reservation.date_reservation)}</div>
+            </td>
+            <td class="px-4 py-3 text-sm text-center">
+                <div class="font-medium text-gray-900">${totalPlaces}</div>
+                <div class="text-gray-500 text-xs">${placesText}</div>
+            </td>
+            <td class="px-4 py-3 text-sm font-medium text-green-600">${reservation.prix}</td>
+            <td class="px-4 py-3 text-sm text-gray-900">${reservation.horaire}</td>
+            <td class="px-4 py-3 text-sm">
+                <div class="flex flex-col space-y-1">
                     <button class="btn-accept action-btn bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded text-xs" data-id="${reservation.ID_reservation}">
-                        Accepter
+                        ✓ Accepter
                     </button>
                     <button class="btn-delete action-btn bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-xs" data-id="${reservation.ID_reservation}">
-                        Supprimer
+                        ✕ Supprimer
                     </button>
                 </div>
             </td>
@@ -277,31 +335,40 @@ function updateReservationsTable(reservations) {
     });
 }
 
-function updateAcceptedReservationsTable(reservations) {
+function updateAcceptedReservationsTable(reservations, pagination) {
     const tbody = document.getElementById('accepted-reservations-tbody');
     if (!tbody) return;
     
     tbody.innerHTML = '';
     
     if (reservations.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="8" class="text-center py-4 text-gray-500">Aucune réservation acceptée</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="5" class="text-center py-4 text-gray-500">Aucune réservation acceptée</td></tr>';
         return;
     }
     
     reservations.forEach(reservation => {
         const row = document.createElement('tr');
         row.className = 'table-row border-b border-gray-200 hover:bg-gray-50';
+        
+        // Calcul du total des places
+        const totalPlaces = parseInt(reservation.n_adulte) + parseInt(reservation.n_enfant);
+        const placesText = `${reservation.n_adulte}A ${reservation.n_enfant}E`;
+        
         row.innerHTML = `
-            <td class="px-4 py-3 text-sm">${reservation.prenom} ${reservation.nom}</td>
-            <td class="px-4 py-3 text-sm">${reservation.mail}</td>
-            <td class="px-4 py-3 text-sm text-center">${reservation.n_adulte}</td>
-            <td class="px-4 py-3 text-sm text-center">${reservation.n_enfant}</td>
-            <td class="px-4 py-3 text-sm font-medium">${reservation.prix}</td>
-            <td class="px-4 py-3 text-sm">${reservation.horaire}</td>
-            <td class="px-4 py-3 text-sm">${formatDate(reservation.date_reservation)}</td>
             <td class="px-4 py-3 text-sm">
-                <button class="btn-delete action-btn bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-xs" data-id="${reservation.ID_reservation}">
-                    Supprimer
+                <div class="font-medium text-gray-900">${reservation.prenom} ${reservation.nom}</div>
+                <div class="text-gray-500 text-xs">${reservation.mail}</div>
+                <div class="text-gray-400 text-xs">${formatDate(reservation.date_reservation)}</div>
+            </td>
+            <td class="px-4 py-3 text-sm text-center">
+                <div class="font-medium text-gray-900">${totalPlaces}</div>
+                <div class="text-gray-500 text-xs">${placesText}</div>
+            </td>
+            <td class="px-4 py-3 text-sm font-medium text-green-600">${reservation.prix}</td>
+            <td class="px-4 py-3 text-sm text-gray-900">${reservation.horaire}</td>
+            <td class="px-4 py-3 text-sm">
+                <button class="btn-delete action-btn bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-xs w-full" data-id="${reservation.ID_reservation}">
+                    ✕ Supprimer
                 </button>
             </td>
         `;
@@ -315,12 +382,107 @@ function updateCounters(pendingReservations, acceptedReservations) {
     const acceptedCount = document.getElementById('accepted-count');
     
     if (pendingCount) {
-        pendingCount.textContent = pendingReservations.length;
+        pendingCount.textContent = pendingReservations;
     }
     
     if (acceptedCount) {
-        acceptedCount.textContent = acceptedReservations.length;
+        acceptedCount.textContent = acceptedReservations;
     }
+}
+
+// Mise à jour de la pagination
+function updatePagination(pagination) {
+    // Pagination pour les réservations en attente
+    updateTablePagination('reservations', pagination, 'pending');
+    
+    // Pagination pour les réservations acceptées
+    updateTablePagination('accepted-reservations', pagination, 'accepted');
+}
+
+function updateTablePagination(tableId, pagination, type) {
+    const tableContainer = document.querySelector(`#${tableId}-container`);
+    if (!tableContainer) return;
+    
+    // Supprimer l'ancienne pagination
+    const oldPagination = tableContainer.querySelector('.pagination-controls');
+    if (oldPagination) {
+        oldPagination.remove();
+    }
+    
+    const totalPages = type === 'pending' ? pagination.total_pages_pending : pagination.total_pages_accepted;
+    const totalItems = type === 'pending' ? pagination.total_pending : pagination.total_accepted;
+    const hasPrev = type === 'pending' ? pagination.has_prev_pending : pagination.has_prev_accepted;
+    const hasNext = type === 'pending' ? pagination.has_next_pending : pagination.has_next_accepted;
+    
+    if (totalPages <= 1) return; // Pas de pagination si une seule page
+    
+    const paginationDiv = document.createElement('div');
+    paginationDiv.className = 'pagination-controls flex items-center justify-between px-6 py-4 border-t border-gray-200 bg-gray-50';
+    
+    // Informations sur la pagination
+    const startItem = (pagination.current_page - 1) * pagination.limit + 1;
+    const endItem = Math.min(pagination.current_page * pagination.limit, totalItems);
+    
+    paginationDiv.innerHTML = `
+        <div class="text-sm text-gray-700">
+            Affichage de ${startItem} à ${endItem} sur ${totalItems} réservations
+        </div>
+        <div class="flex items-center space-x-2">
+            <button class="btn-prev-page px-3 py-1 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 ${!hasPrev ? 'opacity-50 cursor-not-allowed' : ''}" ${!hasPrev ? 'disabled' : ''}>
+                Précédent
+            </button>
+            <div class="flex space-x-1">
+                ${generatePageNumbers(pagination.current_page, totalPages)}
+            </div>
+            <button class="btn-next-page px-3 py-1 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 ${!hasNext ? 'opacity-50 cursor-not-allowed' : ''}" ${!hasNext ? 'disabled' : ''}>
+                Suivant
+            </button>
+        </div>
+        <div class="flex items-center space-x-2">
+            <span class="text-sm text-gray-700 ml-3">Par page</span>
+            <select onchange="changeItemsPerPage(parseInt(this.value))" class="text-sm border border-gray-300 rounded-md px-2 py-1">
+                <option value="10" ${pagination.limit === 10 ? 'selected' : ''}>10</option>
+                <option value="25" ${pagination.limit === 25 ? 'selected' : ''}>25</option>
+                <option value="50" ${pagination.limit === 50 ? 'selected' : ''}>50</option>
+                <option value="100" ${pagination.limit === 100 ? 'selected' : ''}>100</option>
+            </select>
+        </div>
+    `;
+    
+    tableContainer.appendChild(paginationDiv);
+}
+
+function generatePageNumbers(currentPage, totalPages) {
+    let pages = [];
+    const maxVisiblePages = 5;
+    
+    if (totalPages <= maxVisiblePages) {
+        // Afficher toutes les pages
+        for (let i = 1; i <= totalPages; i++) {
+            pages.push(i);
+        }
+    } else {
+        // Logique pour afficher un sous-ensemble des pages
+        if (currentPage <= 3) {
+            pages = [1, 2, 3, 4, 5, '...', totalPages];
+        } else if (currentPage >= totalPages - 2) {
+            pages = [1, '...', totalPages - 4, totalPages - 3, totalPages - 2, totalPages - 1, totalPages];
+        } else {
+            pages = [1, '...', currentPage - 1, currentPage, currentPage + 1, '...', totalPages];
+        }
+    }
+    
+    return pages.map(page => {
+        if (page === '...') {
+            return '<span class="px-2 py-1 text-gray-500">...</span>';
+        }
+        const isActive = page === currentPage;
+        return `
+            <button class="btn-page-number px-3 py-1 text-sm font-medium rounded-md ${isActive ? 'bg-blue-500 text-white' : 'text-gray-500 bg-white border border-gray-300 hover:bg-gray-50'}" data-page="${page}">
+                ${page}
+            </button>
+        `;
+    }).join('');
 }
 
 function updateGalaStatus(status) {
@@ -368,7 +530,7 @@ function showNotification(message, type = 'info') {
     notification.innerHTML = `
         <div class="flex items-center justify-between">
             <span>${message}</span>
-            <button class="btn-close-notification ml-4 text-white hover:text-gray-200">
+            <button class="btn-close-notification ml-4 text-white hover:text-gray-200 cursor-pointer">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                 </svg>
@@ -378,6 +540,15 @@ function showNotification(message, type = 'info') {
     
     document.body.appendChild(notification);
     
+    // Ajouter le gestionnaire d'événement directement sur le bouton de fermeture
+    const closeBtn = notification.querySelector('.btn-close-notification');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            hideNotification();
+        });
+    }
+    
+    // Auto-fermeture après 5 secondes
     setTimeout(() => {
         hideNotification();
     }, 5000);
@@ -402,7 +573,7 @@ function showConfirmModal(title, message, onConfirm) {
         <div class="bg-white rounded-lg p-6 max-w-md w-full mx-4">
             <div class="flex items-center justify-between mb-4">
                 <h3 class="text-lg font-semibold text-gray-900">${title}</h3>
-                <button class="btn-close-modal text-gray-400 hover:text-gray-600">
+                <button class="btn-close-modal text-gray-400 hover:text-gray-600 cursor-pointer">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                     </svg>
@@ -422,10 +593,28 @@ function showConfirmModal(title, message, onConfirm) {
     
     document.body.appendChild(modal);
     
+    // Ajouter les gestionnaires d'événements pour les boutons de fermeture
+    const closeButtons = modal.querySelectorAll('.btn-close-modal');
+    closeButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            closeModal();
+        });
+    });
+    
     // Gestionnaire pour le bouton de confirmation
-    modal.querySelector('.btn-confirm').addEventListener('click', () => {
-        closeModal();
-        onConfirm();
+    const confirmBtn = modal.querySelector('.btn-confirm');
+    if (confirmBtn) {
+        confirmBtn.addEventListener('click', () => {
+            closeModal();
+            onConfirm();
+        });
+    }
+    
+    // Fermer la modale en cliquant sur l'arrière-plan
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            closeModal();
+        }
     });
 }
 
