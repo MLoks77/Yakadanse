@@ -9,7 +9,6 @@ Bienvenue sur le dépôt du site **Yakadanse**, association de danse à Saint-Pa
 - [Aperçu du site](#aperçu-du-site)
 - [Fonctionnalités](#fonctionnalités)
 - [Structure du projet](#structure-du-projet)
-- [Installation & utilisation](#installation--utilisation)
 - [Technologies utilisées](#technologies-utilisées)
 - [Contribuer](#contribuer)
 - [Contact](#contact)
@@ -67,18 +66,6 @@ Yakadanse/
 ├── configdb/                # Connexion et gestion de session PHP
 └── ...
 ```
-
-## Installation & utilisation
-1. **Prérequis** :
-   - Serveur web local (ex : XAMPP, WAMP, MAMP) ou hébergement PHP
-   - PHP 7.4 ou supérieur
-2. **Cloner le dépôt** :
-   ```bash
-   git clone https://github.com/votre-utilisateur/Yakadanse.git
-   ```
-3. **Placer le dossier dans le répertoire web** (ex : `htdocs` pour XAMPP)
-4. **Accéder au site** :
-   - Ouvrir `http://localhost/Yakadanse/index.php` dans votre navigateur
 
 ## Technologies utilisées
 - **HTML5 / CSS3** (avec Tailwind CSS via CDN)
