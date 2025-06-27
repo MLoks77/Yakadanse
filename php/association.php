@@ -23,7 +23,7 @@ session_start()
     <meta name="description" content="Yakadanse - Club de danse à Saint-Pathus. Découvrez nos cours de danse, nos spectacles et rejoignez notre communauté passionnée.">
     <meta name="keywords" content="danse, club, Saint-Pathus, cours, gala, association, Yakadanse">
 
-    <title>L'association</title>
+    <title>Yakadanse - L'association</title>
 </head>
 <body>
 <?php require '../include/navbar.php'; ?>
