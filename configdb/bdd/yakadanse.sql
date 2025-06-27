@@ -170,19 +170,3 @@ INSERT INTO `status` (`id_status`, `nom_status`, `valeur_status`, `description`,
 (4, 'Terminé', 1, 'Réservation terminée', '2025-06-26 23:46:20');
 
 -- --------------------------------------------------------
-
---
--- Doublure de structure pour la vue `vue_reservations_completes`
--- (Voir ci-dessous la vue réelle)
---
-CREATE TABLE `vue_reservations_completes` (
-`ID_reservation` int(11)
-,`prenom` varchar(100)
-,`nom` varchar(100)
-,`mail` varchar(255)
-,`n_adulte` int(11)
-,`n_enfant` int(11)
-,`prix` varchar(50)
-,`horaire` text
-,`nom_status` varchar(50)
-,`
