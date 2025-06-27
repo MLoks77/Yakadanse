@@ -336,7 +336,7 @@ function updateReservationsTable(reservations, pagination) {
     tbody.innerHTML = '';
     
     if (reservations.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="5" class="text-center py-4 text-gray-500">Aucune réservation en attente</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="6" class="text-center py-4 text-gray-500">Aucune réservation en attente</td></tr>';
         return;
     }
     
@@ -386,7 +386,7 @@ function updateAcceptedReservationsTable(reservations, pagination) {
     tbody.innerHTML = '';
     
     if (reservations.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="5" class="text-center py-4 text-gray-500">Aucune réservation acceptée</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="6" class="text-center py-4 text-gray-500">Aucune réservation acceptée</td></tr>';
         return;
     }
     
@@ -519,7 +519,7 @@ function generatePageNumbers(currentPage, totalPages, type) {
         }
         const isActive = page === currentPage;
         return `
-            <button class="btn-page-number-${type} px-3 py-1 text-sm font-medium rounded-md ${isActive ? 'bg-blue-500 text-white' : 'text-gray-500 bg-white border border-gray-300 hover:bg-gray-50'}" data-page="${page}">
+            <button class="btn-page-number-${type} px-3 py-1 text-sm font-medium rounded-md ${isActive ? 'bg-pink-500 text-white' : 'text-gray-500 bg-white border border-gray-300 hover:bg-gray-50'}" data-page="${page}">
                 ${page}
             </button>
         `;
