@@ -148,7 +148,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
                 <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
                     <h3 class="text-lg font-semibold text-gray-900 mb-4">Base de donnée</h3>
                     <div class="space-y-3">
-                        <button onclick="loadReservations()" class="w-full bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200">
+                        <button onclick="loadPendingReservations(); loadAcceptedReservations();" class="w-full bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200">
                             Actualiser les données
                         </button>
                         <button onclick="testConnection()" class="w-full bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200">
