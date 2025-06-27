@@ -1,0 +1,42 @@
+<link rel="stylesheet" href="../css/accueilhero.css">
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<!-- =========================
+     Bannière Hero Simplifiée
+     ========================= -->
+<section class="hero-banner w-full bg-gradient-to-r from-neutral-700 to-gray-600 py-2 md:py-4 relative overflow-hidden" style="min-height: 180px; max-height: 260px;">
+    <div class="relative z-10 container mx-auto flex flex-col items-center justify-center px-4 max-w-2xl" style="height:100%;">
+        <h1 class="text-white text-lg sm:text-xl md:text-2xl font-bold drop-shadow-md leading-snug text-center">
+            Yakadance - Panneau Admin
+        </h1>
+    </div>
+</section>
+
+<!-- =========================
+     Fil d'Ariane Professionnel
+     ========================= -->
+<nav class="w-full bg-white shadow-md py-2">
+    <div class="container mx-auto px-4 max-w-2xl">
+        <ol class="flex flex-wrap items-center text-sm text-gray-700 space-x-2" aria-label="Fil d'Ariane">
+            <!-- Premier élément : Accueil -->
+            <li class="flex items-center">
+                <a href="../index.php" class="flex items-center text-black hover:underline font-semibold transition-colors">
+                    <!-- Icône maison -->
+                    <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10 2L2 9h3v7h4v-4h2v4h4V9h3L10 2z"/>
+                    </svg>
+                    Accueil
+                </a>
+            </li>
+            <!-- Séparateur -->
+            <li>
+                <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                </svg>
+            </li>
+            <!-- Deuxième élément : Plan du site (page active) -->
+            <li class="text-black font-bold">
+                Panel Admin
+            </li>
+        </ol>
+    </div>
+</nav>

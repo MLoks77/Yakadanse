@@ -20,13 +20,26 @@
 </head>
 <body class="bg-gray-50">
 <?php require '../include/navbar.html'; ?>
-
+<?php require '../hero/panel.html'; ?>
     <main class="min-h-screen py-8">
         <!-- En-tête du panneau -->
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="mb-8">
-                <h1 class="text-3xl font-bold text-gray-900 mb-2">Panneau d'Administration</h1>
-                <p class="text-gray-600">Gérez les réservations, le gala et les paramètres de Yakadanse</p>
+            <div class="mb-8 flex justify-between items-start">
+                <div>
+                    <h1 class="text-3xl font-bold text-gray-900 mb-2">Panneau d'Administration</h1>
+                    <p class="text-gray-600">Gérez les réservations, le formulaire du gala</p>
+                </div>
+                
+                <!-- Bouton de déconnexion -->
+                <div class="flex items-center space-x-3">
+                    <span class="text-sm text-gray-500">Connecté en tant qu'administrateur</span>
+                    <a href="../configdb/logout.php" class="inline-flex items-center px-4 py-2 bg-red-500 hover:bg-red-600 text-white text-sm font-medium rounded-lg transition-all duration-200 shadow-sm hover:shadow-md">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+                        </svg>
+                        Se déconnecter
+                    </a>
+                </div>
             </div>
 
             <!-- Cartes de statistiques -->
