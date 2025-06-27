@@ -129,7 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $galaOuvert) {
 
 
     <!-- Section double : Prix & Formulaire (toujours côte à côte sur desktop, centrée sur mobile) -->
-    <h1 class="text-3xl md:text-4xl font-extrabold text-pink-600 mb-6 text-center">Réserver sa place</h1>
+    <h1 class="text-3xl md:text-4xl font-extrabold text-pink-600 mb-6 text-center">Réserver vos place</h1>
     <section class="w-full flex justify-center">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-10 w-full max-w-5xl">
             <!-- Colonne Prix -->
@@ -152,6 +152,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $galaOuvert) {
                         Après avoir réservé vos places via le formulaire ou en présentiel, le paiement pourra s'effectuer sur place, le jour du gala, à l'accueil de l'événement. Merci de prévoir l'appoint.<br>
                         Une fois le paiement effectué, vos billets vous seront remis directement.
                     </p>
+                </div>
+                <!-- Section : Comment se déroule la collecte -->
+                <div class="mt-8 rounded-lg p-6">
+                    <h3 class="text-xl font-semibold text-pink-600 mb-3">Collecte des données</h3>
+                    <p class="text-gray-700 text-base">
+                    Après chaque Gala, vos données personnelles enregistrées sur notre site seront supprimées afin de garantir la confidentialité et d'éviter toute fuite d'informations.
+                </p>
                 </div>
             </div>
             <!-- Colonne Formulaire -->
@@ -203,7 +210,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $galaOuvert) {
                     <div>
                         <label class="inline-flex items-center">
                             <input type="checkbox" name="collectedonnee" id="collectedonnee" required class="form-checkbox text-pink-600">
-                            <span class="ml-2 text-gray-700">J'accepte la <a href="../php/mentionlegales.php" target="_blank" class="text-pink-600 underline">collecte de mes données</a> pour la gestion de la réservation.</span>
+                            <span class="ml-2 text-gray-700">En cochant cette case, j'accepte que mes <a href="../php/mentionlegales.php" target="_blank" class="text-pink-600 underline">mes données à caractère personnel</a>  soient collectées pour m'inscrire à cet évènement. Je suis informé(e)
+                        que mes données seront supprimées à l'issue de cet évènement et que je peux exercer mes droits au titre du RGPB en adressant ma demande à : associationyakadanse@gmail.com</span>
                         </label>
                     </div>
                     <button type="submit" class="w-full bg-pink-600 hover:bg-pink-700 text-white font-bold py-3 rounded-lg transition-all duration-200 shadow-lg">Réserver</button>
@@ -224,7 +232,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $galaOuvert) {
         </div>
     </section>
 
-<!-- FAQ -->
+<!-- FAQ --><br><br><br>
+<section class="bg-[#FFFAFA]">
 <section class="max-w-3xl mx-auto my-16">
     <h2 class="text-3xl font-bold text-center text-pink-600 mb-8">FAQ - Questions fréquentes</h2>
     <div class="space-y-4" id="faqAccordion">
@@ -264,9 +273,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $galaOuvert) {
                 <br>Le paiement se déroule sur place lors du gala avant le début de du spectacle ou en présentiel à l'un de nos cours.
             </div>
         </div>
+        <div class="bg-white rounded-lg shadow-md">
+            <button type="button" class="w-full flex justify-between items-center px-6 py-4 text-lg font-semibold text-gray-800 focus:outline-none faq-toggle">
+                Qu'advient-il de mes données ?
+                <span class="ml-2 text-pink-600">+</span>
+            </button>
+            <div class="faq-content px-6 pb-4 text-gray-600">
+                <br>Vos données sont stockées temporairement sur notre site web pendant la période de réservation afin de faciliter la gestion des places. Celles-ci seront supprimées après chaque gala.
+            </div>
+        </div>
     </div>
 </section>
-
+</section>
 <?php require '../include/footer.html'; ?>
 <button id="backToTop" title="Retour en haut" class="fixed bottom-8 right-8 z-50 bg-pink-600 text-white rounded-full p-3 shadow-lg hover:bg-pink-700 transition-all duration-300 hidden">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 m-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
