@@ -360,6 +360,7 @@ function updateReservationsTable(reservations, pagination) {
             </td>
             <td class="px-4 py-3 text-sm font-medium text-green-600">${reservation.prix}</td>
             <td class="px-4 py-3 text-sm text-gray-900">${reservation.horaire}</td>
+            <td class="px-4 py-3 text-sm text-center">${reservation.collectedonnee === 'accepte' ? '<span class=\'text-green-600 font-bold\'>✔</span>' : '<span class=\'text-red-500\'>✖</span>'}</td>
             <td class="px-4 py-3 text-sm">
                 <div class="flex flex-col space-y-1">
                     <button class="btn-accept action-btn bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded text-xs" data-id="${reservation.ID_reservation}">
@@ -409,6 +410,7 @@ function updateAcceptedReservationsTable(reservations, pagination) {
             </td>
             <td class="px-4 py-3 text-sm font-medium text-green-600">${reservation.prix}</td>
             <td class="px-4 py-3 text-sm text-gray-900">${reservation.horaire}</td>
+            <td class="px-4 py-3 text-sm text-center">${reservation.collectedonnee === 'accepte' ? '<span class=\'text-green-600 font-bold\'>✔</span>' : '<span class=\'text-red-500\'>✖</span>'}</td>
             <td class="px-4 py-3 text-sm">
                 <button class="btn-delete action-btn bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-xs w-full" data-id="${reservation.ID_reservation}">
                     ✕ Supprimer

@@ -111,6 +111,20 @@ document.addEventListener('DOMContentLoaded', function() {
             this.style.transform = 'scale(1)';
         });
     });
+
+    // Gestion des onglets pour la page cours.php
+    if (document.querySelector('.tabs-container')) {
+        const tabLinks = document.querySelectorAll('.tab-link');
+        const tabContents = document.querySelectorAll('.tab-content');
+        tabLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                tabLinks.forEach(l => l.classList.remove('active'));
+                tabContents.forEach(c => c.classList.add('hidden'));
+                this.classList.add('active');
+                document.getElementById('tab-' + this.dataset.tab).classList.remove('hidden');
+            });
+        });
+    }
 });
 
 // Styles CSS pour les animations

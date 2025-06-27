@@ -6,6 +6,7 @@ session_start()
 
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,14 +21,16 @@ session_start()
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/accueil.css">
 
-    <meta name="description" content="Yakadanse - Club de danse à Saint-Pathus. Découvrez nos cours de danse, nos spectacles et rejoignez notre communauté passionnée.">
+    <meta name="description"
+        content="Yakadanse - Club de danse à Saint-Pathus. Découvrez nos cours de danse, nos spectacles et rejoignez notre communauté passionnée.">
     <meta name="keywords" content="danse, club, Saint-Pathus, cours, gala, association, Yakadanse">
 
     <title>Yakadanse - Saint-Pathus</title>
 </head>
+
 <body>
-<?php require 'includeindex/navbar.php'; ?>
-<?php require 'includeindex/indexhero.html'; ?>
+    <?php require 'includeindex/navbar.php'; ?>
+    <?php require 'includeindex/indexhero.html'; ?>
 
     <main class="min-h-screen bg-[#181F20]">
         <!-- Section Bienvenue -->
@@ -35,61 +38,190 @@ session_start()
             <div class="container mx-auto px-6 max-w-6xl">
                 <div class="text-center mb-12 animate-fade-in-up">
                     <h1 class="text-4xl md:text-6xl font-bold text-gray-800 mb-6 funnel-display gradient-text">
-                     <span>Yakadanse</span>
-                     <h6>Association de danse en Seine-et-Marne</h6><br>
+                        <span>Yakadanse</span>
+                        <h6>Association de danse en Seine-et-Marne</h6><br>
                     </h1>
                     <p class="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-                        Découvrez la passion de la danse dans notre club convivial de Saint-Pathus. 
+                        Découvrez la passion de la danse dans notre club convivial de Saint-Pathus.
                         Que vous soyez débutant ou confirmé, nous avons le cours qu'il vous faut !
                     </p>
                 </div>
-                
+
                 <div class="grid md:grid-cols-3 gap-8 mt-12">
-                    <div class="bg-white rounded-lg p-8 shadow-lg hover:shadow-xl transition-shadow duration-300 card-hover animate-fade-in-left">
+                    <div
+                        class="bg-white rounded-lg p-8 shadow-lg hover:shadow-xl transition-shadow duration-300 card-hover animate-fade-in-left">
                         <div class="text-center">
-                            <div class="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4 icon-bounce">
-                                <svg class="w-8 h-8 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                            <div
+                                class="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4 icon-bounce">
+                                <svg class="w-8 h-8 text-pink-600" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M13 10V3L4 14h7v7l9-11h-7z" />
                                 </svg>
                             </div>
                             <h3 class="text-xl font-bold text-gray-800 mb-3">Cours pour tous</h3>
                             <p class="text-gray-600">Des cours adaptés à tous les niveaux, de 6 ans à l'âge adulte</p>
                         </div>
                     </div>
-                    
-                    <div class="bg-white rounded-lg p-8 shadow-lg hover:shadow-xl transition-shadow duration-300 card-hover animate-fade-in-up">
+
+                    <div
+                        class="bg-white rounded-lg p-8 shadow-lg hover:shadow-xl transition-shadow duration-300 card-hover animate-fade-in-up">
                         <div class="text-center">
-                            <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4 icon-bounce">
-                                <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+                            <div
+                                class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4 icon-bounce">
+                                <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                                 </svg>
                             </div>
                             <h3 class="text-xl font-bold text-gray-800 mb-3">Spectacles annuels</h3>
-                            <p class="text-gray-600">Tout les ans l'association organise un gala au mois de Juin. Ce gala thématique se déroule au Pôle Culturel de Saint-Pathus sur deux représentations.</p>
+                            <p class="text-gray-600">Tout les ans l'association organise un gala au mois de Juin. Ce
+                                gala thématique se déroule au Pôle Culturel de Saint-Pathus sur deux représentations.
+                            </p>
                         </div>
                     </div>
-                    
-                    <div class="bg-white rounded-lg p-8 shadow-lg hover:shadow-xl transition-shadow duration-300 card-hover animate-fade-in-right">
+
+                    <div
+                        class="bg-white rounded-lg p-8 shadow-lg hover:shadow-xl transition-shadow duration-300 card-hover animate-fade-in-right">
                         <div class="text-center">
-                            <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 icon-bounce">
-                                <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                            <div
+                                class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 icon-bounce">
+                                <svg class="w-8 h-8 text-blue-600" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                                 </svg>
                             </div>
                             <h3 class="text-xl font-bold text-gray-800 mb-3">Communauté</h3>
-                            <p class="text-gray-600">Partagez votre enthousiasme pour la danse dans un environnement chaleureux et encourageant, où l'entraide et la bienveillance sont au cœur de nos valeurs.</p>
+                            <p class="text-gray-600">Partagez votre enthousiasme pour la danse dans un environnement
+                                chaleureux et encourageant, où l'entraide et la bienveillance sont au cœur de nos
+                                valeurs.</p>
                         </div>
                     </div>
                 </div>
+        </section>
+
+        <!-- Section Nos Événements -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-6 max-w-6xl">
+                <div class="text-center mb-12 animate-fade-in-up">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4 funnel-display">Nos Événements</h2>
+                    <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                        Découvrez notre spectacle annuel
+                    </p>
+                </div>
+
+                <section class="py-16">
+                    <div class="container mx-auto px-6 max-w-6xl flex flex-col md:flex-row items-center gap-12">
+                        <!-- Texte à gauche -->
+                        <div class="md:w-1/2 w-full mb-8 md:mb-0">
+                            <h3 class="text-2xl md:text-3xl font-bold text-gray-800 mb-4 funnel-display">Gala de Juin
+                            </h3>
+                            <p class="text-lg text-gray-700 mb-6">
+                                Chaque année, les professeurs de Yakadanse accompagnent et préparent nos danseuses tout
+                                au long de la saison en vue du gala de fin d'année. Pour plus d'informations,
+                                rendez-vous sur la page dédiée.
+                            </p>
+                            <button>
+                                <a href="php/gala.php"
+                                    class="flex justify-center gap-2 items-center mx-auto shadow-xl text-lg bg-pink-400 hover:bg-pink-600 transition-colors duration-300 text-white lg:font-semibold isolation-auto border-pink-400 hover:border-pink-600 before:absolute before:w-full before:transition-all before:duration-700 before:hover:w-full before:-left-full before:hover:left-0 before:rounded-full before:bg-pink-500 hover:text-white before:-z-10 before:aspect-square before:hover:scale-150 before:hover:duration-700 relative z-10 px-4 py-2 overflow-hidden border-2 rounded-full group"
+                                    style="text-decoration: none;">
+                                    Découvrir
+                                    <svg class="w-8 h-8 justify-end group-hover:rotate-90 group-hover:bg-pink-50 text-pink-50 ease-linear duration-300 rounded-full border border-pink-600 group-hover:border-none p-2 rotate-45"
+                                        viewBox="0 0 16 19" xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M7 18C7 18.5523 7.44772 19 8 19C8.55228 19 9 18.5523 9 18H7ZM8.70711 0.292893C8.31658 -0.0976311 7.68342 -0.0976311 7.29289 0.292893L0.928932 6.65685C0.538408 7.04738 0.538408 7.68054 0.928932 8.07107C1.31946 8.46159 1.95262 8.46159 2.34315 8.07107L8 2.41421L13.6569 8.07107C14.0474 8.46159 14.6805 8.46159 15.0711 8.07107C15.4616 7.68054 15.4616 7.04738 15.0711 6.65685L8.70711 0.292893ZM9 18L9 1H7L7 18H9Z"
+                                            class="fill-white group-hover:fill-pink-600"></path>
+                                    </svg>
+                                </a>
+                            </button>
+
+                        </div>
+                        <div class="md:w-1/2 w-full flex justify-center">
+                            <div id="animation-carousel" class="relative w-full" data-carousel="static">
+                                <!-- Carousel wrapper -->
+                                <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+                                    <!-- Item 1 -->
+                                    <div class="hidden duration-200 ease-linear" data-carousel-item>
+                                        <img src="images/groupe5.jpg"
+                                            class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+                                            alt="Groupe de danseurs">
+                                    </div>
+                                    <!-- Item 2 -->
+                                    <div class="hidden duration-200 ease-linear" data-carousel-item>
+                                        <img src="images/final.jpg"
+                                            class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+                                            alt="Final du gala">
+                                    </div>
+                                    <!-- Item 3 -->
+                                    <div class="hidden duration-200 ease-linear" data-carousel-item="active">
+                                        <img src="images/groupe.jpg"
+                                            class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+                                            alt="Groupe de danseurs">
+                                    </div>
+                                    <!-- Item 4 -->
+                                    <div class="hidden duration-200 ease-linear" data-carousel-item>
+                                        <img src="images/groupe2.jpg"
+                                            class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+                                            alt="Groupe de danseurs">
+                                    </div>
+                                    <!-- Item 5 -->
+                                    <div class="hidden duration-200 ease-linear" data-carousel-item>
+                                        <img src="images/groupe3.jpg"
+                                            class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+                                            alt="Groupe de danseurs">
+                                    </div>
+                                    <!-- Item 6 -->
+                                    <div class="hidden duration-200 ease-linear" data-carousel-item>
+                                        <img src="images/groupe4.jpg"
+                                            class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
+                                            alt="Groupe de danseurs">
+                                    </div>
+                                </div>
+                                <!-- Slider controls -->
+                                <button type="button"
+                                    class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                                    data-carousel-prev>
+                                    <span
+                                        class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-white-800/30 group-hover:bg-white/50 dark:group-hover:bg-white-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                                        <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180"
+                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                            viewBox="0 0 6 10">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                stroke-width="2" d="M5 1 1 5l4 4" />
+                                        </svg>
+                                        <span class="sr-only">Précédente</span>
+                                    </span>
+                                </button>
+                                <button type="button"
+                                    class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none"
+                                    data-carousel-next>
+                                    <span
+                                        class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-white-800/30 group-hover:bg-white/50 dark:group-hover:bg-white-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
+                                        <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180"
+                                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                            viewBox="0 0 6 10">
+                                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                                stroke-width="2" d="m1 9 4-4-4-4" />
+                                        </svg>
+                                        <span class="sr-only">Prochaine</span>
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
             </div>
         </section>
 
         <!-- Section Nos Disciplines -->
-        <section class="py-16 bg-white">
+        <section class="py-16 bg-[#FFFAFA]">
             <div class="container mx-auto px-6 max-w-6xl">
                 <div class="text-center mb-12 animate-fade-in-up">
                     <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4 funnel-display">Nos Disciplines</h2>
-                    <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    <p class="text-lg text-gray-600 max-w-1xl mx-auto">
                         Découvrez la diversité de nos cours de danse pour tous les âges et tous les niveaux
                     </p>
                 </div>
@@ -185,102 +317,28 @@ session_start()
                         </div>
                     </div>
                 </div>
+                <div class="flex justify-center w-full my-8">
+                    <a href="php/cours.php"
+                        class="flex justify-center gap-2 items-center shadow-xl text-lg bg-pink-400 hover:bg-pink-600 transition-colors duration-300 text-white lg:font-semibold isolation-auto border-pink-400 hover:border-pink-600 before:absolute before:w-full before:transition-all before:duration-700 before:hover:w-full before:-left-full before:hover:left-0 before:rounded-full before:bg-pink-500 hover:text-white before:-z-10 before:aspect-square before:hover:scale-150 before:hover:duration-700 relative z-10 px-4 py-2 overflow-hidden border-2 rounded-full group"
+                        style="text-decoration: none;">
+                        Nos cours
+                        <svg class="w-8 h-8 justify-end group-hover:rotate-90 group-hover:bg-pink-50 text-pink-50 ease-linear duration-300 rounded-full border border-pink-600 group-hover:border-none p-2 rotate-45"
+                            viewBox="0 0 16 19" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M7 18C7 18.5523 7.44772 19 8 19C8.55228 19 9 18.5523 9 18H7ZM8.70711 0.292893C8.31658 -0.0976311 7.68342 -0.0976311 7.29289 0.292893L0.928932 6.65685C0.538408 7.04738 0.538408 7.68054 0.928932 8.07107C1.31946 8.46159 1.95262 8.46159 2.34315 8.07107L8 2.41421L13.6569 8.07107C14.0474 8.46159 14.6805 8.46159 15.0711 8.07107C15.4616 7.68054 15.4616 7.04738 15.0711 6.65685L8.70711 0.292893ZM9 18L9 1H7L7 18H9Z"
+                                class="fill-white group-hover:fill-pink-600"></path>
+                        </svg>
+                    </a>
+                </div>
             </div>
         </section>
 
-        <!-- Section Nos Événements -->
-        <section class="py-16 bg-[#FFFAFA]">
+
+
+        <section class="py-16 bg-white">
             <div class="container mx-auto px-6 max-w-6xl">
                 <div class="text-center mb-12 animate-fade-in-up">
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4 funnel-display">Nos Événements</h2>
-                    <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-                        Découvrez notre spectacle annuel
-                    </p>
-                </div>
-
-            <section class="py-16">
-                <div class="container mx-auto px-6 max-w-6xl flex flex-col md:flex-row items-center gap-12">
-                    <!-- Texte à gauche -->
-                    <div class="md:w-1/2 w-full mb-8 md:mb-0">
-                        <h3 class="text-2xl md:text-3xl font-bold text-gray-800 mb-4 funnel-display">Gala de Juin</h3>
-                        <p class="text-lg text-gray-700 mb-6">
-                            Chaque année, les professeurs de Yakadanse accompagnent et préparent nos danseuses tout au long de la saison en vue du gala de fin d'année. Pour plus d'informations, rendez-vous sur la page dédiée.
-                        </p>
-<button>
-<a href="php/gala.php" class="flex justify-center gap-2 items-center mx-auto shadow-xl text-lg bg-pink-400 hover:bg-pink-600 transition-colors duration-300 text-white lg:font-semibold isolation-auto border-pink-400 hover:border-pink-600 before:absolute before:w-full before:transition-all before:duration-700 before:hover:w-full before:-left-full before:hover:left-0 before:rounded-full before:bg-pink-500 hover:text-white before:-z-10 before:aspect-square before:hover:scale-150 before:hover:duration-700 relative z-10 px-4 py-2 overflow-hidden border-2 rounded-full group" style="text-decoration: none;">
-    Découvrir
-    <svg
-      class="w-8 h-8 justify-end group-hover:rotate-90 group-hover:bg-pink-50 text-pink-50 ease-linear duration-300 rounded-full border border-pink-600 group-hover:border-none p-2 rotate-45"
-      viewBox="0 0 16 19"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M7 18C7 18.5523 7.44772 19 8 19C8.55228 19 9 18.5523 9 18H7ZM8.70711 0.292893C8.31658 -0.0976311 7.68342 -0.0976311 7.29289 0.292893L0.928932 6.65685C0.538408 7.04738 0.538408 7.68054 0.928932 8.07107C1.31946 8.46159 1.95262 8.46159 2.34315 8.07107L8 2.41421L13.6569 8.07107C14.0474 8.46159 14.6805 8.46159 15.0711 8.07107C15.4616 7.68054 15.4616 7.04738 15.0711 6.65685L8.70711 0.292893ZM9 18L9 1H7L7 18H9Z"
-        class="fill-white group-hover:fill-pink-600"
-      ></path>
-    </svg>
-</a>
-</button>
-    </div>
-                    <div class="md:w-1/2 w-full flex justify-center">
-                        <div id="animation-carousel" class="relative w-full" data-carousel="static">
-                            <!-- Carousel wrapper -->
-                            <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
-                                 <!-- Item 1 -->
-                                <div class="hidden duration-200 ease-linear" data-carousel-item>
-                                    <img src="images/groupe5.jpg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="Groupe de danseurs">
-                                </div>
-                                <!-- Item 2 -->
-                                <div class="hidden duration-200 ease-linear" data-carousel-item>
-                                    <img src="images/final.jpg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="Final du gala">
-                                </div>
-                                <!-- Item 3 -->
-                                <div class="hidden duration-200 ease-linear" data-carousel-item="active">
-                                    <img src="images/groupe.jpg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="Groupe de danseurs">
-                                </div>
-                                <!-- Item 4 -->
-                                <div class="hidden duration-200 ease-linear" data-carousel-item>
-                                    <img src="images/groupe2.jpg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="Groupe de danseurs">
-                                </div>
-                                <!-- Item 5 -->
-                                <div class="hidden duration-200 ease-linear" data-carousel-item>
-                                    <img src="images/groupe3.jpg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="Groupe de danseurs">
-                                </div>
-                                 <!-- Item 6 -->
-                                <div class="hidden duration-200 ease-linear" data-carousel-item>
-                                    <img src="images/groupe4.jpg" class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="Groupe de danseurs">
-                                </div>
-                            </div>
-                            <!-- Slider controls -->
-                            <button type="button" class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-prev>
-                                <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-white-800/30 group-hover:bg-white/50 dark:group-hover:bg-white-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                                    <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
-                                    </svg>
-                                    <span class="sr-only">Précédente</span>
-                                </span>
-                            </button>
-                            <button type="button" class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none" data-carousel-next>
-                                <span class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-white-800/30 group-hover:bg-white/50 dark:group-hover:bg-white-800/60 group-focus:ring-4 group-focus:ring-white dark:group-focus:ring-gray-800/70 group-focus:outline-none">
-                                    <svg class="w-4 h-4 text-white dark:text-gray-800 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
-                                    </svg>
-                                    <span class="sr-only">Prochaine</span>
-                                </span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            </div>
-        </section>
-    
-      
-        <section class="py-16 bg-gradient-to-br from-pink-50 to-purple-50">
-            <div class="container mx-auto px-6 max-w-6xl">
-                <div class="text-center mb-12 animate-fade-in-up">
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4 funnel-display">Nous retrouver</h2>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4 funnel-display">Comment nous retrouver</h2>
                     <p class="text-lg text-gray-600 max-w-2xl mx-auto">
                         Retrouvez Yakadanse à l'adresse suivante :<br>
                         <span class="font-semibold">77178 Saint-Pathus, France</span><br>
@@ -288,33 +346,61 @@ session_start()
                 </div>
                 <div class="flex justify-center">
                     <div class="w-full md:w-3/4 lg:w-2/3 rounded-lg overflow-hidden shadow-lg">
-                        <iframe 
-                            src="https://www.google.com/maps?q=49.07136666617248,2.798486328527565&output=embed"
-                            width="100%" 
-                            height="400" 
-                            style="border:0;" 
-                            allowfullscreen="" 
-                            loading="lazy" 
-                            referrerpolicy="no-referrer-when-downgrade"
-                        ></iframe>
+                        <iframe src="https://www.google.com/maps?q=49.07136666617248,2.798486328527565&output=embed"
+                            width="100%" height="400" style="border:0;" allowfullscreen="" loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                 </div>
             </div>
         </section>
 
-    <button id="backToTop" title="Retour en haut" class="fixed bottom-8 right-8 z-50 bg-pink-600 text-white rounded-full p-3 shadow-lg hover:bg-pink-700 transition-all duration-300 hidden">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 m-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/>
-        </svg>
-    </button>
+        <section class="py-12 bg-white">
+            <div class="container mx-auto px-6 max-w-4xl text-center">
+                <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-6">Suivez-nous aussi sur les réseaux sociaux</h2>
+                <p class="text-gray-600 mb-8">Afin de rester informé de nos actualités, événements et photos, rejoignez-nous sur nos réseaux :</p>
+                <div class="flex justify-center gap-8">
+                    <a href="https://www.facebook.com/yakadanse.stpathus/" target="_blank" rel="noopener" aria-label="Facebook Yakadanse"
+                        class="text-pink-600 hover:text-pink-800 transition-colors duration-300 text-3xl">
+                        <svg class="inline-block w-10 h-10" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M22.675 0h-21.35C.595 0 0 .592 0 1.326v21.348C0 23.406.595 24 1.325 24h11.495v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.797.143v3.24l-1.918.001c-1.504 0-1.797.715-1.797 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116C23.406 24 24 23.406 24 22.674V1.326C24 .592 23.406 0 22.675 0"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.instagram.com/ykads/" target="_blank" rel="noopener" aria-label="Instagram Yakadanse"
+                        class="text-pink-600 hover:text-pink-800 transition-colors duration-300 text-3xl">
+                        <svg class="inline-block w-10 h-10" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                            <rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                            <circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                            <circle cx="17" cy="7" r="1" fill="currentColor" stroke="none"/>
+                        </svg>
+                    </a>
+                    <a href="php/formulairecontact.php" aria-label="Email Yakadanse"
+                        class="text-pink-600 hover:text-pink-800 transition-colors duration-300 text-3xl">
+                        <svg class="inline-block w-10 h-10" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                            <rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                            <polyline points="3 7 12 13 21 7" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+
+        <button id="backToTop" title="Retour en haut"
+            class="fixed bottom-8 right-8 z-50 bg-pink-600 text-white rounded-full p-3 shadow-lg hover:bg-pink-700 transition-all duration-300 hidden">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 m-0" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+            </svg>
+        </button>
     </main>
-<script src="js/main.js"></script>
-<script src="js/accueil.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.4.1/flowbite.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-<?php require 'includeindex/footer.html'; ?>
+    <script src="js/main.js"></script>
+    <script src="js/accueil.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.4.1/flowbite.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <?php require 'includeindex/footer.html'; ?>
 
 </body>
+
 </html>
 
 <script>
@@ -330,6 +416,9 @@ window.addEventListener('scroll', function() {
 
 // Scroll smooth vers le haut
 document.getElementById('backToTop').addEventListener('click', function() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
 });
 </script>

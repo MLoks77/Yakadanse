@@ -493,4 +493,87 @@
         width: 80px;
         height: 80px;
     }
+}
+
+/* Onglets (tabs) pour la page cours.php */
+.tabs-container {
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+.tab-link {
+    flex: 1 1 0;
+    padding: 1rem 0;
+    font-weight: 600;
+    color: #6b7280;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s;
+    outline: none;
+}
+.tab-link.active {
+    color: #ec4899;
+    border-bottom: 2px solid #ec4899;
+    background: #fdf2f8;
+}
+.tab-content {
+    animation: fadeInUp 0.5s;
+}
+
+/* Timeline pour les horaires */
+.timeline {
+    border-left: 3px solid #ec4899;
+    margin-left: 1.5rem;
+    padding-left: 2rem;
+    position: relative;
+}
+.timeline-item {
+    margin-bottom: 2.5rem;
+    position: relative;
+}
+.timeline-time {
+    font-weight: bold;
+    color: #ec4899;
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+    position: relative;
+}
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -2.7rem;
+    top: 0.1rem;
+    width: 1.2rem;
+    height: 1.2rem;
+    background: #ec4899;
+    border-radius: 50%;
+    box-shadow: 0 0 0 4px #fdf2f8;
+}
+.timeline-content {
+    margin-left: 0.5rem;
+}
+.timeline-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 8px rgba(236,72,153,0.07);
+    border-left: 4px solid #ec4899;
+}
+.timeline-card .badge {
+    margin-left: 0.5rem;
+}
+@media (max-width: 768px) {
+    .timeline {
+        margin-left: 0.5rem;
+        padding-left: 1rem;
+    }
+    .timeline-card {
+        padding: 0.75rem 1rem;
+    }
+
+    .timeline-item::before {
+        left: -1.7rem;
+        top: 0.1rem;
+    }
 } 

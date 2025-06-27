@@ -100,6 +100,7 @@ CREATE TABLE `reservation` (
   `prix` varchar(50) NOT NULL,
   `horaire` text NOT NULL,
   `id_status` int(11) DEFAULT NULL,
+  `collectedonnee` text DEFAULT NULL,
   `date_reservation` timestamp NOT NULL DEFAULT current_timestamp(),
   `date_modification` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -184,105 +185,4 @@ CREATE TABLE `vue_reservations_completes` (
 ,`prix` varchar(50)
 ,`horaire` text
 ,`nom_status` varchar(50)
-,`valeur_status` tinyint(1)
-,`date_reservation` timestamp
-,`date_modification` timestamp
-);
-
--- --------------------------------------------------------
-
---
--- Structure de la vue `vue_reservations_completes`
---
-DROP TABLE IF EXISTS `vue_reservations_completes`;
-
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vue_reservations_completes`  AS SELECT `r`.`ID_reservation` AS `ID_reservation`, `r`.`prenom` AS `prenom`, `r`.`nom` AS `nom`, `r`.`mail` AS `mail`, `r`.`n_adulte` AS `n_adulte`, `r`.`n_enfant` AS `n_enfant`, `r`.`prix` AS `prix`, `r`.`horaire` AS `horaire`, `s`.`nom_status` AS `nom_status`, `s`.`valeur_status` AS `valeur_status`, `r`.`date_reservation` AS `date_reservation`, `r`.`date_modification` AS `date_modification` FROM (`reservation` `r` left join `status` `s` on(`r`.`id_status` = `s`.`id_status`)) ORDER BY `r`.`date_reservation` DESC ;
-
---
--- Index pour les tables déchargées
---
-
---
--- Index pour la table `compte`
---
-ALTER TABLE `compte`
-  ADD PRIMARY KEY (`ID_compte`),
-  ADD UNIQUE KEY `identifiant` (`identifiant`),
-  ADD KEY `idx_identifiant` (`identifiant`),
-  ADD KEY `idx_role` (`role`);
-
---
--- Index pour la table `gala`
---
-ALTER TABLE `gala`
-  ADD PRIMARY KEY (`id_gala`);
-
---
--- Index pour la table `prix`
---
-ALTER TABLE `prix`
-  ADD PRIMARY KEY (`id_prix`);
-
---
--- Index pour la table `reservation`
---
-ALTER TABLE `reservation`
-  ADD PRIMARY KEY (`ID_reservation`),
-  ADD KEY `idx_mail` (`mail`),
-  ADD KEY `idx_date_reservation` (`date_reservation`),
-  ADD KEY `idx_status` (`id_status`);
-
---
--- Index pour la table `status`
---
-ALTER TABLE `status`
-  ADD PRIMARY KEY (`id_status`);
-
---
--- AUTO_INCREMENT pour les tables déchargées
---
-
---
--- AUTO_INCREMENT pour la table `compte`
---
-ALTER TABLE `compte`
-  MODIFY `ID_compte` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT pour la table `gala`
---
-ALTER TABLE `gala`
-  MODIFY `id_gala` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT pour la table `prix`
---
-ALTER TABLE `prix`
-  MODIFY `id_prix` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT pour la table `reservation`
---
-ALTER TABLE `reservation`
-  MODIFY `ID_reservation` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT pour la table `status`
---
-ALTER TABLE `status`
-  MODIFY `id_status` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- Contraintes pour les tables déchargées
---
-
---
--- Contraintes pour la table `reservation`
---
-ALTER TABLE `reservation`
-  ADD CONSTRAINT `reservation_ibfk_1` FOREIGN KEY (`id_status`) REFERENCES `status` (`id_status`) ON DELETE SET NULL;
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+,`
