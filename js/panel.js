@@ -413,7 +413,7 @@ function updateAcceptedReservationsTable(reservations, pagination) {
             <td class="px-4 py-3 text-sm text-center">${reservation.collectedonnee === 'accepte' ? '<span class=\'text-green-600 font-bold\'>✔</span>' : '<span class=\'text-red-500\'>✖</span>'}</td>
             <td class="px-4 py-3 text-sm">
                 <button class="btn-delete action-btn bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded text-xs w-full" data-id="${reservation.ID_reservation}">
-                    ✕ Supprimer
+                    ✕
                 </button>
             </td>
         `;
