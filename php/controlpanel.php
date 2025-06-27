@@ -162,12 +162,12 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
             <!-- Tableaux des réservations -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <!-- Réservations en attente -->
-                <div id="reservations-container" class="bg-white rounded-lg shadow-sm border border-gray-200">
+                <div id="reservations-container" class="bg-white rounded-lg shadow-sm border border-gray-200 flex flex-col min-h-[500px]">
                     <div class="px-6 py-4 border-b border-gray-200">
                         <h3 class="text-lg font-semibold text-gray-900">Réservations en attente</h3>
                         <p class="text-sm text-gray-600">Nouvelles demandes de réservation</p>
                     </div>
-                    <div class="overflow-y-auto max-h-96">
+                    <div class="flex-1 overflow-y-auto">
                         <table class="min-w-full divide-y divide-gray-200">
                             <thead class="bg-gray-50 sticky top-0">
                                 <tr>
@@ -191,12 +191,12 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
                 </div>
 
                 <!-- Réservations acceptées -->
-                <div id="accepted-reservations-container" class="bg-white rounded-lg shadow-sm border border-gray-200">
+                <div id="accepted-reservations-container" class="bg-white rounded-lg shadow-sm border border-gray-200 flex flex-col min-h-[500px]">
                     <div class="px-6 py-4 border-b border-gray-200">
                         <h3 class="text-lg font-semibold text-gray-900">Réservations acceptées</h3>
                         <p class="text-sm text-gray-600">Réservations confirmées</p>
                     </div>
-                    <div class="overflow-y-auto max-h-96">
+                    <div class="flex-1 overflow-y-auto">
                         <table class="min-w-full divide-y divide-gray-200">
                             <thead class="bg-gray-50 sticky top-0">
                                 <tr>

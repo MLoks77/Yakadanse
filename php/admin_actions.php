@@ -11,6 +11,9 @@ switch($action) {
     case 'get_reservations':
         getReservations($pdo);
         break;
+    case 'get_counters':
+        getCounters($pdo);
+        break;
     case 'test_connection':
         testConnection($pdo);
         break;
@@ -39,14 +42,9 @@ switch($action) {
         echo json_encode(['success' => false, 'message' => 'Action non reconnue']);
 }
 
-// Fonction pour récupérer les réservations
-function getReservations($pdo) {
+// Fonction pour récupérer les compteurs
+function getCounters($pdo) {
     try {
-        // Paramètres de pagination
-        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-        $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 10;
-        $offset = ($page - 1) * $limit;
-        
         // Compter le total des réservations en attente
         $stmt = $pdo->prepare("
             SELECT COUNT(*) as total 
@@ -67,55 +65,112 @@ function getReservations($pdo) {
         $stmt->execute();
         $totalAccepted = $stmt->fetch(PDO::FETCH_ASSOC)['total'];
         
-        // Réservations en attente avec pagination
-        $stmt = $pdo->prepare("
-            SELECT r.*, s.nom_status 
-            FROM reservation r 
-            LEFT JOIN status s ON r.id_status = s.id_status 
-            WHERE r.id_status IS NULL OR s.valeur_status = 0
-            ORDER BY r.date_reservation DESC
-            LIMIT :limit OFFSET :offset
-        ");
-        $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
-        $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
-        $stmt->execute();
-        $reservations = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        
-        // Réservations acceptées avec pagination
-        $stmt = $pdo->prepare("
-            SELECT r.*, s.nom_status 
-            FROM reservation r 
-            LEFT JOIN status s ON r.id_status = s.id_status 
-            WHERE s.valeur_status = 1
-            ORDER BY r.date_reservation DESC
-            LIMIT :limit OFFSET :offset
-        ");
-        $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
-        $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
-        $stmt->execute();
-        $accepted_reservations = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        
-        // Calculer les informations de pagination
-        $totalPagesPending = ceil($totalPending / $limit);
-        $totalPagesAccepted = ceil($totalAccepted / $limit);
-        
-        $response = [
+        echo json_encode([
             'success' => true,
-            'reservations' => $reservations,
-            'accepted_reservations' => $accepted_reservations,
-            'pagination' => [
-                'current_page' => $page,
-                'limit' => $limit,
-                'total_pending' => $totalPending,
-                'total_accepted' => $totalAccepted,
-                'total_pages_pending' => $totalPagesPending,
-                'total_pages_accepted' => $totalPagesAccepted,
-                'has_prev_pending' => $page > 1,
-                'has_next_pending' => $page < $totalPagesPending,
-                'has_prev_accepted' => $page > 1,
-                'has_next_accepted' => $page < $totalPagesAccepted
-            ]
-        ];
+            'total_pending' => $totalPending,
+            'total_accepted' => $totalAccepted
+        ]);
+        
+    } catch(PDOException $e) {
+        error_log("Erreur SQL: " . $e->getMessage());
+        echo json_encode([
+            'success' => false, 
+            'message' => 'Erreur lors de la récupération des compteurs',
+            'debug' => $e->getMessage()
+        ]);
+    }
+}
+
+// Fonction pour récupérer les réservations
+function getReservations($pdo) {
+    try {
+        // Paramètres de pagination
+        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $limit = isset($_GET['limit']) ? (int)$_GET['limit'] : 10;
+        $type = isset($_GET['type']) ? $_GET['type'] : 'pending';
+        $offset = ($page - 1) * $limit;
+        
+        if ($type === 'pending') {
+            // Compter le total des réservations en attente
+            $stmt = $pdo->prepare("
+                SELECT COUNT(*) as total 
+                FROM reservation r 
+                LEFT JOIN status s ON r.id_status = s.id_status 
+                WHERE r.id_status IS NULL OR s.valeur_status = 0
+            ");
+            $stmt->execute();
+            $totalPending = $stmt->fetch(PDO::FETCH_ASSOC)['total'];
+            
+            // Réservations en attente avec pagination
+            $stmt = $pdo->prepare("
+                SELECT r.*, s.nom_status 
+                FROM reservation r 
+                LEFT JOIN status s ON r.id_status = s.id_status 
+                WHERE r.id_status IS NULL OR s.valeur_status = 0
+                ORDER BY r.date_reservation DESC
+                LIMIT :limit OFFSET :offset
+            ");
+            $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+            $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+            $stmt->execute();
+            $reservations = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            
+            // Calculer les informations de pagination
+            $totalPagesPending = ceil($totalPending / $limit);
+            
+            $response = [
+                'success' => true,
+                'reservations' => $reservations,
+                'pagination' => [
+                    'current_page' => $page,
+                    'limit' => $limit,
+                    'total_pending' => $totalPending,
+                    'total_pages_pending' => $totalPagesPending,
+                    'has_prev_pending' => $page > 1,
+                    'has_next_pending' => $page < $totalPagesPending
+                ]
+            ];
+        } else {
+            // Compter le total des réservations acceptées
+            $stmt = $pdo->prepare("
+                SELECT COUNT(*) as total 
+                FROM reservation r 
+                LEFT JOIN status s ON r.id_status = s.id_status 
+                WHERE s.valeur_status = 1
+            ");
+            $stmt->execute();
+            $totalAccepted = $stmt->fetch(PDO::FETCH_ASSOC)['total'];
+            
+            // Réservations acceptées avec pagination
+            $stmt = $pdo->prepare("
+                SELECT r.*, s.nom_status 
+                FROM reservation r 
+                LEFT JOIN status s ON r.id_status = s.id_status 
+                WHERE s.valeur_status = 1
+                ORDER BY r.date_reservation DESC
+                LIMIT :limit OFFSET :offset
+            ");
+            $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+            $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+            $stmt->execute();
+            $accepted_reservations = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            
+            // Calculer les informations de pagination
+            $totalPagesAccepted = ceil($totalAccepted / $limit);
+            
+            $response = [
+                'success' => true,
+                'accepted_reservations' => $accepted_reservations,
+                'pagination' => [
+                    'current_page' => $page,
+                    'limit' => $limit,
+                    'total_accepted' => $totalAccepted,
+                    'total_pages_accepted' => $totalPagesAccepted,
+                    'has_prev_accepted' => $page > 1,
+                    'has_next_accepted' => $page < $totalPagesAccepted
+                ]
+            ];
+        }
         
         echo json_encode($response);
         
