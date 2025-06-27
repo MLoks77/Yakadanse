@@ -41,8 +41,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
                 
                 <!-- Bouton de déconnexion -->
                 <div class="flex items-center space-x-3">
-                    <span class="text-sm text-gray-500">Connecté</span>
-                    <a href="../configdb/logout.php" class="inline-flex items-center px-4 py-2 bg-red-500 hover:bg-red-600 text-white text-sm font-medium rounded-lg transition-all duration-200 shadow-sm hover:shadow-md">
+                    <a href="../configdb/logout.php" class="inline-flex items-center px-3 py-2 bg-red-500 hover:bg-red-600 text-white text-xs sm:text-sm font-medium rounded-lg transition-all duration-200 shadow-sm hover:shadow-md w-full sm:w-auto justify-center sm:justify-start">
                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
                         </svg>

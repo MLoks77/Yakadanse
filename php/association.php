@@ -84,7 +84,7 @@ session_start()
                 </p>
                 
                 <div class="text-center">
-                    <a href="php/formulairecontact.php" class="inline-block bg-pink-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-pink-700 transition-colors duration-300">
+                    <a href="../php/formulairecontact.php" class="inline-block bg-pink-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-pink-700 transition-colors duration-300">
                         Nous contacter
                     </a>
                 </div>
