@@ -83,6 +83,9 @@ CREATE TABLE `prix` (
 INSERT INTO `prix` (`id_prix`, `type_prix`, `montant`, `description`, `date_creation`, `date_modification`) VALUES
 (1, 'Adulte', 8.00, 'Prix pour les adultes', '2025-06-26 23:46:20', '2025-06-26 23:46:20'),
 (2, 'Enfant', 5.00, 'Prix pour les enfants', '2025-06-26 23:46:20', '2025-06-26 23:46:20');
+(3, 'danseuse1', 100.00, 'Prix pour 1 danseuse', '2025-06-26 23:46:20', '2025-06-26 23:46:20'),
+(4, 'danseuse2', 180.00, 'Prix pour 2 danseuse', '2025-06-26 23:46:20', '2025-06-26 23:46:20'),
+(5, 'danseuse3', 250.00, 'Prix pour 3 danseuse', '2025-06-26 23:46:20', '2025-06-26 23:46:20');
 
 -- --------------------------------------------------------
 
