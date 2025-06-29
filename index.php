@@ -220,99 +220,34 @@ session_start()
         <section class="py-16 bg-[#FFFAFA]">
             <div class="container mx-auto px-6 max-w-6xl">
                 <div class="text-center mb-12 animate-fade-in-up">
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4 funnel-display">Nos Disciplines</h2>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4 funnel-display">Notre Discipline</h2>
                     <p class="text-lg text-gray-600 max-w-1xl mx-auto">
-                        Découvrez la diversité de nos cours de danse pour tous les âges et tous les niveaux
+                        Nous proposons uniquement le Moderne Jazz, une discipline complète et accessible à tous.
                     </p>
                 </div>
 
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Éveil et Initiation -->
-                    <div class="discipline-card animate-fade-in-left">
-                        <div class="text-center">
-                            <span class="badge badge-primary mb-3">3-6 ans</span>
-                            <h3 class="text-xl font-bold text-gray-800 mb-3">Éveil & Initiation</h3>
-                            <p class="text-gray-700 mb-4">Pour les 3-6 ans</p>
-                            <ul class="feature-list text-sm text-gray-600 space-y-2 text-left">
-                                <li>Découverte du mouvement</li>
-                                <li>Coordination et rythme</li>
-                                <li>Expression corporelle</li>
-                                <li>Jeux dansés</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Classique -->
-                    <div class="discipline-card animate-fade-in-up">
-                        <div class="text-center">
-                            <span class="badge badge-secondary mb-3">7+ ans</span>
-                            <h3 class="text-xl font-bold text-gray-800 mb-3">Danse Classique</h3>
-                            <p class="text-gray-700 mb-4">À partir de 7 ans</p>
-                            <ul class="feature-list text-sm text-gray-600 space-y-2 text-left">
-                                <li>Technique académique</li>
-                                <li>Barre au sol</li>
-                                <li>Chorégraphies</li>
-                                <li>Préparation aux pointes</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Contemporain -->
-                    <div class="discipline-card animate-fade-in-right">
-                        <div class="text-center">
-                            <span class="badge badge-success mb-3">Ados/Adultes</span>
-                            <h3 class="text-xl font-bold text-gray-800 mb-3">Danse Contemporaine</h3>
-                            <p class="text-gray-700 mb-4">Adolescents et adultes</p>
-                            <ul class="feature-list text-sm text-gray-600 space-y-2 text-left">
-                                <li>Expression libre</li>
-                                <li>Improvisation</li>
-                                <li>Création chorégraphique</li>
-                                <li>Technique moderne</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Jazz -->
-                    <div class="discipline-card animate-fade-in-left">
+                <div class="flex justify-center">
+                    <!-- Moderne Jazz -->
+                    <div class="discipline-card animate-fade-in-up max-w-md w-full">
                         <div class="text-center">
                             <span class="badge badge-primary mb-3">Tous niveaux</span>
-                            <h3 class="text-xl font-bold text-gray-800 mb-3">Jazz</h3>
-                            <p class="text-gray-700 mb-4">Tous niveaux</p>
-                            <ul class="feature-list text-sm text-gray-600 space-y-2 text-left">
-                                <li>Rythme et dynamisme</li>
-                                <li>Chorégraphies modernes</li>
-                                <li>Technique jazz</li>
-                                <li>Style commercial</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Hip-Hop -->
-                    <div class="discipline-card animate-fade-in-up">
-                        <div class="text-center">
-                            <span class="badge badge-secondary mb-3">Ados/Adultes</span>
-                            <h3 class="text-xl font-bold text-gray-800 mb-3">Hip-Hop</h3>
-                            <p class="text-gray-700 mb-4">Adolescents et adultes</p>
-                            <ul class="feature-list text-sm text-gray-600 space-y-2 text-left">
-                                <li>Break dance</li>
-                                <li>Street dance</li>
-                                <li>Freestyle</li>
-                                <li>Culture urbaine</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Adultes -->
-                    <div class="discipline-card animate-fade-in-right">
-                        <div class="text-center">
-                            <span class="badge badge-success mb-3">Adultes</span>
-                            <h3 class="text-xl font-bold text-gray-800 mb-3">Cours Adultes</h3>
-                            <p class="text-gray-700 mb-4">Tous niveaux</p>
-                            <ul class="feature-list text-sm text-gray-600 space-y-2 text-left">
-                                <li>Remise en forme</li>
-                                <li>Danse de salon</li>
-                                <li>Zumba fitness</li>
-                                <li>Cours débutants</li>
+                            <h3 class="text-xl font-bold text-gray-800 mb-3">Moderne Jazz</h3>
+                            <p class="text-gray-700 mb-4">
+                                Le Moderne Jazz est la seule discipline enseignée à Yakadanse. Cette danse dynamique et expressive mélange les techniques du jazz, du contemporain et d'autres styles modernes.
+                            </p>
+                            <ul class="text-gray-700 text-left mb-4 space-y-2 max-w-xs mx-auto">
+                                <li class="flex items-center">
+                                    <svg class="w-5 h-5 text-pink-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                    Travail du rythme et de la coordination
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-5 h-5 text-pink-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                    Développement de l'expression corporelle
+                                </li>
+                                <li class="flex items-center">
+                                    <svg class="w-5 h-5 text-pink-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                    Accessible à tous les âges et niveaux
+                                </li>
                             </ul>
                         </div>
                     </div>
