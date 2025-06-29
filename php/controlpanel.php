@@ -132,6 +132,28 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
                     </div>
                 </div>
 
+                <!-- Gestion des Prix des Danseuses -->
+                <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Prix des Cours</h3>
+                    <div class="space-y-3">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">1 danseuse (€)</label>
+                            <input type="number" id="prix_danseuse1" step="0.01" min="0" class="form-input w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">2 danseuses (€)</label>
+                            <input type="number" id="prix_danseuse2" step="0.01" min="0" class="form-input w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">3 danseuses (€)</label>
+                            <input type="number" id="prix_danseuse3" step="0.01" min="0" class="form-input w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        <button class="btn-update-prix-danseuses w-full bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200">
+                            Mettre à jour
+                        </button>
+                    </div>
+                </div>
+
                 <!-- Actions de masse -->
                 <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
                     <h3 class="text-lg font-semibold text-gray-900 mb-4">Supprimer les données</h3>

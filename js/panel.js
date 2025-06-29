@@ -13,11 +13,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // Gestionnaires d'événements
     setupEventListeners();
     
-    // Chargement initial des données
-    loadPendingReservations();
-    loadAcceptedReservations();
-    loadGalaStatus();
-    loadPrix();
+    // Chargement initial des données avec un délai pour s'assurer que le DOM est prêt
+    setTimeout(() => {
+        loadPendingReservations();
+        loadAcceptedReservations();
+        loadGalaStatus();
+        loadPrix();
+        loadPrixDanseuses();
+    }, 100);
 });
 
 // Initialisation du panneau
@@ -43,6 +46,9 @@ function setupEventListeners() {
         }
         if (e.target.classList.contains('btn-update-prix')) {
             handleUpdatePrix();
+        }
+        if (e.target.classList.contains('btn-update-prix-danseuses')) {
+            handleUpdatePrixDanseuses();
         }
         // Gestion de la pagination pour les réservations en attente
         if (e.target.classList.contains('btn-prev-page-pending')) {
@@ -258,6 +264,39 @@ function handleUpdatePrix() {
     });
 }
 
+// Gestion des prix des danseuses
+function handleUpdatePrixDanseuses() {
+    const prixDanseuse1 = document.getElementById('prix_danseuse1').value;
+    const prixDanseuse2 = document.getElementById('prix_danseuse2').value;
+    const prixDanseuse3 = document.getElementById('prix_danseuse3').value;
+    
+    if (!prixDanseuse1 || !prixDanseuse2 || !prixDanseuse3) {
+        showNotification('Veuillez remplir tous les champs de prix des danseuses', 'error');
+        return;
+    }
+    
+    fetch('admin_actions.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `action=update_prix_danseuses&prix_danseuse1=${prixDanseuse1}&prix_danseuse2=${prixDanseuse2}&prix_danseuse3=${prixDanseuse3}`
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            showNotification('Prix des danseuses mis à jour avec succès !', 'success');
+            loadPrixDanseuses();
+        } else {
+            showNotification('Erreur lors de la mise à jour des prix des danseuses', 'error');
+        }
+    })
+    .catch(error => {
+        console.error('Erreur:', error);
+        showNotification('Erreur de connexion', 'error');
+    });
+}
+
 // Chargement des données
 function loadPendingReservations() {
     fetch(`admin_actions.php?action=get_reservations&page=${currentPagePending}&limit=${itemsPerPagePending}&type=pending`)
@@ -325,6 +364,37 @@ function loadPrix() {
     })
     .catch(error => {
         console.error('Erreur:', error);
+    });
+}
+
+function loadPrixDanseuses() {
+    console.log('Chargement des prix des danseuses...');
+    fetch('admin_actions.php?action=get_prix_danseuses')
+    .then(response => response.json())
+    .then(data => {
+        console.log('Réponse reçue pour les prix des danseuses:', data);
+        if (data.success) {
+            const element1 = document.getElementById('prix_danseuse1');
+            const element2 = document.getElementById('prix_danseuse2');
+            const element3 = document.getElementById('prix_danseuse3');
+            
+            console.log('Éléments trouvés:', { element1, element2, element3 });
+            
+            if (element1) element1.value = data.prix_danseuse1;
+            if (element2) element2.value = data.prix_danseuse2;
+            if (element3) element3.value = data.prix_danseuse3;
+            
+            console.log('Prix des danseuses chargés:', {
+                danseuse1: data.prix_danseuse1,
+                danseuse2: data.prix_danseuse2,
+                danseuse3: data.prix_danseuse3
+            });
+        } else {
+            console.error('Erreur lors du chargement des prix des danseuses:', data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Erreur lors du chargement des prix des danseuses:', error);
     });
 }
 

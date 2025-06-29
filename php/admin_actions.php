@@ -38,6 +38,12 @@ switch($action) {
     case 'update_prix':
         updatePrix($pdo);
         break;
+    case 'get_prix_danseuses':
+        getPrixDanseuses($pdo);
+        break;
+    case 'update_prix_danseuses':
+        updatePrixDanseuses($pdo);
+        break;
     default:
         echo json_encode(['success' => false, 'message' => 'Action non reconnue']);
 }
@@ -367,6 +373,85 @@ function updatePrix($pdo) {
         echo json_encode(['success' => true, 'message' => 'Prix mis à jour']);
     } catch(PDOException $e) {
         echo json_encode(['success' => false, 'message' => 'Erreur lors de la mise à jour des prix']);
+    }
+}
+
+// Fonction pour récupérer les prix des danseuses
+function getPrixDanseuses($pdo) {
+    try {
+        $stmt = $pdo->prepare("SELECT type_prix, montant FROM prix WHERE type_prix IN ('danseuse1', 'danseuse2', 'danseuse3')");
+        $stmt->execute();
+        $prix = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        $prix_danseuse1 = 100.00;
+        $prix_danseuse2 = 180.00;
+        $prix_danseuse3 = 250.00;
+        
+        // Vérifier si les prix existent et les créer si nécessaire
+        $prix_existants = [];
+        foreach ($prix as $p) {
+            $prix_existants[] = $p['type_prix'];
+            if ($p['type_prix'] == 'danseuse1') {
+                $prix_danseuse1 = $p['montant'];
+            } elseif ($p['type_prix'] == 'danseuse2') {
+                $prix_danseuse2 = $p['montant'];
+            } elseif ($p['type_prix'] == 'danseuse3') {
+                $prix_danseuse3 = $p['montant'];
+            }
+        }
+        
+        // Créer les prix manquants
+        if (!in_array('danseuse1', $prix_existants)) {
+            $stmt = $pdo->prepare("INSERT INTO prix (type_prix, montant, description) VALUES ('danseuse1', ?, 'Prix pour 1 danseuse')");
+            $stmt->execute([$prix_danseuse1]);
+        }
+        if (!in_array('danseuse2', $prix_existants)) {
+            $stmt = $pdo->prepare("INSERT INTO prix (type_prix, montant, description) VALUES ('danseuse2', ?, 'Prix pour 2 danseuses')");
+            $stmt->execute([$prix_danseuse2]);
+        }
+        if (!in_array('danseuse3', $prix_existants)) {
+            $stmt = $pdo->prepare("INSERT INTO prix (type_prix, montant, description) VALUES ('danseuse3', ?, 'Prix pour 3 danseuses')");
+            $stmt->execute([$prix_danseuse3]);
+        }
+        
+        echo json_encode([
+            'success' => true,
+            'prix_danseuse1' => $prix_danseuse1,
+            'prix_danseuse2' => $prix_danseuse2,
+            'prix_danseuse3' => $prix_danseuse3
+        ]);
+    } catch(PDOException $e) {
+        echo json_encode(['success' => false, 'message' => 'Erreur lors de la récupération des prix des danseuses', 'debug' => $e->getMessage()]);
+    }
+}
+
+// Fonction pour mettre à jour les prix des danseuses
+function updatePrixDanseuses($pdo) {
+    $prix_danseuse1 = $_POST['prix_danseuse1'] ?? null;
+    $prix_danseuse2 = $_POST['prix_danseuse2'] ?? null;
+    $prix_danseuse3 = $_POST['prix_danseuse3'] ?? null;
+    
+    if (!$prix_danseuse1 || !$prix_danseuse2 || !$prix_danseuse3) {
+        echo json_encode(['success' => false, 'message' => 'Prix des danseuses manquants']);
+        return;
+    }
+    
+    try {
+        // Mettre à jour le prix danseuse1
+        $stmt = $pdo->prepare("UPDATE prix SET montant = ? WHERE type_prix = 'danseuse1'");
+        $stmt->execute([$prix_danseuse1]);
+        
+        // Mettre à jour le prix danseuse2
+        $stmt = $pdo->prepare("UPDATE prix SET montant = ? WHERE type_prix = 'danseuse2'");
+        $stmt->execute([$prix_danseuse2]);
+        
+        // Mettre à jour le prix danseuse3
+        $stmt = $pdo->prepare("UPDATE prix SET montant = ? WHERE type_prix = 'danseuse3'");
+        $stmt->execute([$prix_danseuse3]);
+        
+        echo json_encode(['success' => true, 'message' => 'Prix des danseuses mis à jour']);
+    } catch(PDOException $e) {
+        echo json_encode(['success' => false, 'message' => 'Erreur lors de la mise à jour des prix des danseuses']);
     }
 }
 ?> 

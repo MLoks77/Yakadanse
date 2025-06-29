@@ -1,6 +1,22 @@
 <?php
 
-session_start()
+session_start();
+
+// Connexion à la base de données pour récupérer les prix
+require "../configdb/setup.php";
+
+// Récupérer les prix des danseuses
+$stmt = $pdo->prepare("SELECT type_prix, montant FROM prix WHERE type_prix IN ('danseuse1', 'danseuse2', 'danseuse3')");
+$stmt->execute();
+$prix_danseuses = [];
+while ($row = $stmt->fetch()) {
+    $prix_danseuses[$row['type_prix']] = $row['montant'];
+}
+
+// Valeurs par défaut si les prix ne sont pas trouvés
+$prix_danseuse1 = $prix_danseuses['danseuse1'] ?? 100.00;
+$prix_danseuse2 = $prix_danseuses['danseuse2'] ?? 180.00;
+$prix_danseuse3 = $prix_danseuses['danseuse3'] ?? 250.00;
 
 ?>
 
@@ -80,23 +96,23 @@ session_start()
                             <div class="bg-gradient-to-r from-pink-50 to-purple-50 rounded-lg p-6 border-l-4 border-pink-500">
                                 <div class="flex justify-between items-center mb-2">
                                     <span class="font-semibold text-lg">1 danseuse</span>
-                                    <span class="text-2xl font-bold text-pink-600">100€</span>
+                                    <span class="text-2xl font-bold text-pink-600"><?php echo number_format($prix_danseuse1, 2, ',', ' '); ?>€</span>
                                 </div>
                                 <p class="text-gray-600">Inscription à l'année complète</p>
                             </div>
                             <div class="bg-gradient-to-r from-purple-50 to-blue-50 rounded-lg p-6 border-l-4 border-purple-500">
                                 <div class="flex justify-between items-center mb-2">
                                     <span class="font-semibold text-lg">2 personnes</span>
-                                    <span class="text-2xl font-bold text-purple-600">180€</span>
+                                    <span class="text-2xl font-bold text-purple-600"><?php echo number_format($prix_danseuse2, 2, ',', ' '); ?>€</span>
                                 </div>
-                                <p class="text-gray-600">Même famille - Économie de 20€</p>
+                                <p class="text-gray-600">Même famille - Économie de <?php echo number_format($prix_danseuse1 * 2 - $prix_danseuse2, 2, ',', ' '); ?>€</p>
                             </div>
                             <div class="bg-gradient-to-r from-blue-50 to-green-50 rounded-lg p-6 border-l-4 border-blue-500">
                                 <div class="flex justify-between items-center mb-2">
                                     <span class="font-semibold text-lg">3 personnes</span>
-                                    <span class="text-2xl font-bold text-blue-600">250€</span>
+                                    <span class="text-2xl font-bold text-blue-600"><?php echo number_format($prix_danseuse3, 2, ',', ' '); ?>€</span>
                                 </div>
-                                <p class="text-gray-600">Même famille - Économie de 50€</p>
+                                <p class="text-gray-600">Même famille - Économie de <?php echo number_format($prix_danseuse1 * 3 - $prix_danseuse3, 2, ',', ' '); ?>€</p>
                             </div>
                         </div>
                     </div>
