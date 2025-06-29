@@ -257,3 +257,91 @@
     }
 }
 
+/* Styles pour les sections de gestion de contenu */
+.content-management-section {
+    transition: all 0.3s ease;
+}
+
+.content-management-section:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Styles pour les textareas */
+.form-input[rows] {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Styles pour les boutons de gestion de contenu */
+.btn-update-texte-gala,
+.btn-update-texte-index {
+    transition: all 0.2s ease;
+}
+
+.btn-update-texte-gala:hover,
+.btn-update-texte-index:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Styles pour les inputs de fichiers */
+input[type="file"] {
+    cursor: pointer;
+}
+
+input[type="file"]::-webkit-file-upload-button {
+    background: #3b82f6;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-right: 8px;
+}
+
+input[type="file"]::-webkit-file-upload-button:hover {
+    background: #2563eb;
+}
+
+/* Animation pour les sections de contenu */
+.content-section {
+    animation: fadeInUp 0.5s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Styles pour les messages d'état */
+.status-message {
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.status-message.success {
+    background-color: #d1fae5;
+    color: #065f46;
+    border: 1px solid #a7f3d0;
+}
+
+.status-message.error {
+    background-color: #fee2e2;
+    color: #991b1b;
+    border: 1px solid #fecaca;
+}
+
+.status-message.info {
+    background-color: #dbeafe;
+    color: #1e40af;
+    border: 1px solid #bfdbfe;
+}
+

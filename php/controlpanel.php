@@ -134,7 +134,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
 
                 <!-- Gestion des Prix des Danseuses -->
                 <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Prix des Cours</h3>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Prix des tarifs annuels</h3>
                     <div class="space-y-3">
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-1">1 danseuse (€)</label>
@@ -151,6 +151,74 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
                         <button class="btn-update-prix-danseuses w-full bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200">
                             Mettre à jour
                         </button>
+                    </div>
+                </div>
+
+                <!-- Gestion du Contenu Dynamique - Gala -->
+                <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Contenu du Gala</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Texte des nouvelles</label>
+                            <textarea id="gala_texte" rows="4" class="form-input w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Entrez le texte des nouvelles du gala..."></textarea>
+                        </div>
+                        <div class="flex gap-2">
+                            <button class="btn-update-texte-gala flex-1 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200" data-type="gala_texte">
+                                Mettre à jour
+                            </button>
+                            <button class="btn-delete-texte-gala bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200" data-type="gala_texte">
+                                Supprimer
+                            </button>
+                        </div>
+                        
+                        <div class="border-t pt-4">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Image du gala</label>
+                            <div class="space-y-2">
+                                <input type="file" id="gala_image_input" accept="image/*" class="form-input w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <div class="flex gap-2">
+                                    <button class="btn-upload-image-gala flex-1 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200" data-type="gala_img">
+                                        Uploader
+                                    </button>
+                                    <button class="btn-delete-image-gala bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200" data-type="gala_img">
+                                        Supprimer
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gestion du Contenu Dynamique - Index -->
+                <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Contenu de l'Accueil</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Texte des actualités</label>
+                            <textarea id="index_texte" rows="4" class="form-input w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Entrez le texte des actualités..."></textarea>
+                        </div>
+                        <div class="flex gap-2">
+                            <button class="btn-update-texte-index flex-1 bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200" data-type="index_texte">
+                                Mettre à jour
+                            </button>
+                            <button class="btn-delete-texte-index bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200" data-type="index_texte">
+                                Supprimer
+                            </button>
+                        </div>
+                        
+                        <div class="border-t pt-4">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Image des actualités</label>
+                            <div class="space-y-2">
+                                <input type="file" id="index_image_input" accept="image/*" class="form-input w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <div class="flex gap-2">
+                                    <button class="btn-upload-image-index flex-1 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200" data-type="index_img">
+                                        Uploader
+                                    </button>
+                                    <button class="btn-delete-image-index bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200" data-type="index_img">
+                                        Supprimer
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 

@@ -44,6 +44,21 @@ switch($action) {
     case 'update_prix_danseuses':
         updatePrixDanseuses($pdo);
         break;
+    case 'get_texte':
+        getTexte($pdo);
+        break;
+    case 'update_texte':
+        updateTexte($pdo);
+        break;
+    case 'delete_texte':
+        deleteTexte($pdo);
+        break;
+    case 'upload_image':
+        uploadImage($pdo);
+        break;
+    case 'delete_image':
+        deleteImage($pdo);
+        break;
     default:
         echo json_encode(['success' => false, 'message' => 'Action non reconnue']);
 }
@@ -452,6 +467,181 @@ function updatePrixDanseuses($pdo) {
         echo json_encode(['success' => true, 'message' => 'Prix des danseuses mis à jour']);
     } catch(PDOException $e) {
         echo json_encode(['success' => false, 'message' => 'Erreur lors de la mise à jour des prix des danseuses']);
+    }
+}
+
+// Fonction pour récupérer un texte
+function getTexte($pdo) {
+    $type = $_GET['type'] ?? '';
+    
+    if (!$type) {
+        echo json_encode(['success' => false, 'message' => 'Type de texte manquant']);
+        return;
+    }
+    
+    try {
+        $stmt = $pdo->prepare("SELECT texte FROM texte WHERE type_texte = ? LIMIT 1");
+        $stmt->execute([$type]);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        echo json_encode([
+            'success' => true,
+            'texte' => $result ? $result['texte'] : null
+        ]);
+    } catch(PDOException $e) {
+        echo json_encode(['success' => false, 'message' => 'Erreur lors de la récupération du texte']);
+    }
+}
+
+// Fonction pour mettre à jour un texte
+function updateTexte($pdo) {
+    $type = $_POST['type'] ?? '';
+    $texte = $_POST['texte'] ?? '';
+    
+    if (!$type) {
+        echo json_encode(['success' => false, 'message' => 'Type de texte manquant']);
+        return;
+    }
+    
+    try {
+        // Vérifier si le texte existe déjà
+        $stmt = $pdo->prepare("SELECT ID_text FROM texte WHERE type_texte = ? LIMIT 1");
+        $stmt->execute([$type]);
+        $existing = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        if ($existing) {
+            // Mettre à jour le texte existant
+            $stmt = $pdo->prepare("UPDATE texte SET texte = ? WHERE type_texte = ?");
+            $stmt->execute([$texte, $type]);
+        } else {
+            // Créer un nouveau texte
+            $stmt = $pdo->prepare("INSERT INTO texte (type_texte, texte) VALUES (?, ?)");
+            $stmt->execute([$type, $texte]);
+        }
+        
+        echo json_encode(['success' => true, 'message' => 'Texte mis à jour avec succès']);
+    } catch(PDOException $e) {
+        echo json_encode(['success' => false, 'message' => 'Erreur lors de la mise à jour du texte']);
+    }
+}
+
+// Fonction pour supprimer un texte
+function deleteTexte($pdo) {
+    $type = $_POST['type'] ?? '';
+    
+    if (!$type) {
+        echo json_encode(['success' => false, 'message' => 'Type de texte manquant']);
+        return;
+    }
+    
+    try {
+        $stmt = $pdo->prepare("UPDATE texte SET texte = NULL WHERE type_texte = ?");
+        $stmt->execute([$type]);
+        
+        echo json_encode(['success' => true, 'message' => 'Texte supprimé avec succès']);
+    } catch(PDOException $e) {
+        echo json_encode(['success' => false, 'message' => 'Erreur lors de la suppression du texte']);
+    }
+}
+
+// Fonction pour uploader une image
+function uploadImage($pdo) {
+    $type = $_POST['type'] ?? '';
+    
+    if (!$type) {
+        echo json_encode(['success' => false, 'message' => 'Type d\'image manquant']);
+        return;
+    }
+    
+    if (!isset($_FILES['image']) || $_FILES['image']['error'] !== UPLOAD_ERR_OK) {
+        echo json_encode(['success' => false, 'message' => 'Aucune image fournie ou erreur d\'upload']);
+        return;
+    }
+    
+    $file = $_FILES['image'];
+    $allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+    
+    if (!in_array($file['type'], $allowedTypes)) {
+        echo json_encode(['success' => false, 'message' => 'Type de fichier non autorisé']);
+        return;
+    }
+    
+    if ($file['size'] > 5 * 1024 * 1024) { // 5MB max
+        echo json_encode(['success' => false, 'message' => 'Fichier trop volumineux (max 5MB)']);
+        return;
+    }
+    
+    try {
+        // Générer un nom de fichier unique
+        $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
+        $filename = $type . '_' . time() . '.' . $extension;
+        $uploadPath = '../images/img/' . $filename;
+        
+        // Supprimer l'ancienne image si elle existe
+        $stmt = $pdo->prepare("SELECT chemin_image FROM image WHERE type = ? LIMIT 1");
+        $stmt->execute([$type]);
+        $oldImage = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        if ($oldImage && $oldImage['chemin_image']) {
+            $oldPath = '../images/img/' . $oldImage['chemin_image'];
+            if (file_exists($oldPath)) {
+                unlink($oldPath);
+            }
+        }
+        
+        // Uploader la nouvelle image
+        if (move_uploaded_file($file['tmp_name'], $uploadPath)) {
+            // Mettre à jour la base de données
+            $stmt = $pdo->prepare("SELECT ID_image FROM image WHERE type = ? LIMIT 1");
+            $stmt->execute([$type]);
+            $existing = $stmt->fetch(PDO::FETCH_ASSOC);
+            
+            if ($existing) {
+                $stmt = $pdo->prepare("UPDATE image SET chemin_image = ? WHERE type = ?");
+                $stmt->execute([$filename, $type]);
+            } else {
+                $stmt = $pdo->prepare("INSERT INTO image (type, chemin_image) VALUES (?, ?)");
+                $stmt->execute([$type, $filename]);
+            }
+            
+            echo json_encode(['success' => true, 'message' => 'Image uploadée avec succès', 'filename' => $filename]);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Erreur lors de l\'upload de l\'image']);
+        }
+    } catch(PDOException $e) {
+        echo json_encode(['success' => false, 'message' => 'Erreur lors de l\'upload de l\'image']);
+    }
+}
+
+// Fonction pour supprimer une image
+function deleteImage($pdo) {
+    $type = $_POST['type'] ?? '';
+    
+    if (!$type) {
+        echo json_encode(['success' => false, 'message' => 'Type d\'image manquant']);
+        return;
+    }
+    
+    try {
+        // Récupérer le chemin de l'image
+        $stmt = $pdo->prepare("SELECT chemin_image FROM image WHERE type = ? LIMIT 1");
+        $stmt->execute([$type]);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        if ($result && $result['chemin_image']) {
+            $imagePath = '../images/img/' . $result['chemin_image'];
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
+            }
+        }
+        
+        // Supprimer de la base de données
+        $stmt = $pdo->prepare("UPDATE image SET chemin_image = NULL WHERE type = ?");
+        $stmt->execute([$type]);
+        
+        echo json_encode(['success' => true, 'message' => 'Image supprimée avec succès']);
+    } catch(PDOException $e) {
+        echo json_encode(['success' => false, 'message' => 'Erreur lors de la suppression de l\'image']);
     }
 }
 ?> 

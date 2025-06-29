@@ -82,7 +82,7 @@ CREATE TABLE `prix` (
 
 INSERT INTO `prix` (`id_prix`, `type_prix`, `montant`, `description`, `date_creation`, `date_modification`) VALUES
 (1, 'Adulte', 8.00, 'Prix pour les adultes', '2025-06-26 23:46:20', '2025-06-26 23:46:20'),
-(2, 'Enfant', 5.00, 'Prix pour les enfants', '2025-06-26 23:46:20', '2025-06-26 23:46:20');
+(2, 'Enfant', 5.00, 'Prix pour les enfants', '2025-06-26 23:46:20', '2025-06-26 23:46:20'),
 (3, 'danseuse1', 100.00, 'Prix pour 1 danseuse', '2025-06-26 23:46:20', '2025-06-26 23:46:20'),
 (4, 'danseuse2', 180.00, 'Prix pour 2 danseuse', '2025-06-26 23:46:20', '2025-06-26 23:46:20'),
 (5, 'danseuse3', 250.00, 'Prix pour 3 danseuse', '2025-06-26 23:46:20', '2025-06-26 23:46:20');
@@ -174,3 +174,39 @@ INSERT INTO `status` (`id_status`, `nom_status`, `valeur_status`, `description`,
 (4, 'Terminé', 1, 'Réservation terminée', '2025-06-26 23:46:20');
 
 -- --------------------------------------------------------
+
+--
+-- Structure de la table `texte`
+--
+
+CREATE TABLE `texte` (
+  `ID_text` int(11) NOT NULL AUTO_INCREMENT,
+  `type_texte` varchar(50) NOT NULL,
+  `texte` text DEFAULT NULL,
+  `date_creation` timestamp NOT NULL DEFAULT current_timestamp(),
+  `date_modification` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`ID_text`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `texte`
+--
+
+INSERT INTO `texte` (`ID_text`, `type_texte`, `texte`, `date_creation`, `date_modification`) VALUES
+(1, 'gala_texte', 'Les dernières nouvelles du gala', NOW(), NOW()),
+(2, 'index_texte', 'Découvrez nos actualités et événements', NOW(), NOW());
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `image`
+--
+
+CREATE TABLE `image` (
+  `ID_image` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(50) NOT NULL,
+  `chemin_image` varchar(255) DEFAULT NULL,
+  `date_creation` timestamp NOT NULL DEFAULT current_timestamp(),
+  `date_modification` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`ID_image`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

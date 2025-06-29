@@ -1,6 +1,18 @@
 <?php
 
-session_start()
+session_start();
+
+// Connexion à la base de données pour récupérer le contenu dynamique
+require "configdb/setup.php";
+
+// Récupérer le texte et l'image de l'index
+$stmt = $pdo->prepare("SELECT texte FROM texte WHERE type_texte = 'index_texte' LIMIT 1");
+$stmt->execute();
+$indexTexte = $stmt->fetch(PDO::FETCH_ASSOC);
+
+$stmt = $pdo->prepare("SELECT chemin_image FROM image WHERE type = 'index_img' LIMIT 1");
+$stmt->execute();
+$indexImage = $stmt->fetch(PDO::FETCH_ASSOC);
 
 ?>
 
@@ -100,6 +112,46 @@ session_start()
                         </div>
                     </div>
                 </div>
+        </section>
+
+        <!-- Section Actualités -->
+        <section class="py-16 bg-white">
+            <div class="container mx-auto px-6 max-w-6xl">
+                <div class="text-center mb-12 animate-fade-in-up">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4 funnel-display">Actualités</h2>
+                </div>
+                
+                <div class="bg-gradient-to-r from-pink-50 to-purple-50 rounded-xl shadow-lg p-8">
+                    <?php if ($indexTexte && $indexTexte['texte']): ?>
+                        <div class="flex flex-col md:flex-row gap-8 items-center">
+                            <?php if ($indexImage && $indexImage['chemin_image']): ?>
+                                <div class="md:w-1/3 flex-shrink-0">
+                                    <img src="images/img/<?php echo htmlspecialchars($indexImage['chemin_image']); ?>" 
+                                         alt="Actualités Yakadanse" 
+                                         class="w-full h-64 object-cover rounded-lg shadow-md">
+                                </div>
+                            <?php endif; ?>
+                            
+                            <div class="<?php echo ($indexImage && $indexImage['chemin_image']) ? 'md:w-2/3' : 'w-full'; ?>">
+                                <div class="prose prose-lg max-w-none">
+                                    <p class="text-gray-700 leading-relaxed text-lg">
+                                        <?php echo nl2br(htmlspecialchars($indexTexte['texte'])); ?>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    <?php else: ?>
+                        <div class="text-center py-8">
+                            <div class="text-gray-500 text-lg">
+                                <svg class="w-16 h-16 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                </svg>
+                                <p>Aucune actualité pour le moment</p>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </div>
         </section>
 
         <!-- Section Nos Événements -->
@@ -267,8 +319,6 @@ session_start()
                 </div>
             </div>
         </section>
-
-
 
         <section class="py-16 bg-white">
             <div class="container mx-auto px-6 max-w-6xl">

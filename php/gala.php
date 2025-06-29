@@ -15,6 +15,15 @@ while ($row = $stmt->fetch()) {
     $prix[$row['type_prix']] = $row['montant'];
 }
 
+// Récupérer le texte et l'image du gala
+$stmt = $pdo->prepare("SELECT texte FROM texte WHERE type_texte = 'gala_texte' LIMIT 1");
+$stmt->execute();
+$galaTexte = $stmt->fetch(PDO::FETCH_ASSOC);
+
+$stmt = $pdo->prepare("SELECT chemin_image FROM image WHERE type = 'gala_img' LIMIT 1");
+$stmt->execute();
+$galaImage = $stmt->fetch(PDO::FETCH_ASSOC);
+
 // Gestion de la notification
 $notification = null;
 $notificationType = null;
@@ -96,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $galaOuvert) {
 
 
     <!-- Section d'introduction indépendante et centrée -->
-    <section class="bg-[#FFFAFA] mb-12 px-0 py-0 flex flex-col items-center">
+    <section class="mb-12 px-0 py-0 flex flex-col items-center">
     <br><br>
         <h1 class="text-3xl md:text-4xl font-extrabold text-pink-600 mb-6 text-center">Gala Yakadanse</h1>
         <div class="flex flex-col md:flex-row items-center md:items-start justify-center gap-8 max-w-4xl mx-auto">
@@ -129,8 +138,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $galaOuvert) {
 
 
     <!-- Section double : Prix & Formulaire (toujours côte à côte sur desktop, centrée sur mobile) -->
-    <h1 class="text-3xl md:text-4xl font-extrabold text-pink-600 mb-6 text-center">Réserver vos place</h1>
-    <section class="w-full flex justify-center">
+    <h1 class="bg-[#FFFAFA] text-3xl md:text-4xl font-extrabold text-pink-600 text-center">Réserver vos place<br><br></h1>
+    
+    <!-- Section Nouvelles du Gala -->
+    <section class="bg-[#FFFAFA] py-8">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                <h2 class="text-2xl font-bold text-pink-600 mb-6 text-center">Les dernières nouvelles du gala</h2>
+                
+                <?php if ($galaTexte && $galaTexte['texte']): ?>
+                    <div class="flex flex-col md:flex-row gap-8 items-start">
+                        <?php if ($galaImage && $galaImage['chemin_image']): ?>
+                            <div class="md:w-1/3 flex-shrink-0">
+                                <img src="../images/img/<?php echo htmlspecialchars($galaImage['chemin_image']); ?>" 
+                                     alt="Image du gala" 
+                                     class="w-full h-48 object-cover rounded-lg shadow-md">
+                            </div>
+                        <?php endif; ?>
+                        
+                        <div class="<?php echo ($galaImage && $galaImage['chemin_image']) ? 'md:w-2/3' : 'w-full'; ?>">
+                            <div class="prose prose-lg max-w-none">
+                                <p class="text-gray-700 leading-relaxed">
+                                    <?php echo nl2br(htmlspecialchars($galaTexte['texte'])); ?>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                <?php else: ?>
+                    <div class="text-center py-8">
+                        <div class="text-gray-500 text-lg">
+                            <svg class="w-16 h-16 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                            <p>Aucune nouvelle information</p>
+                        </div>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </div>
+    </section>
+    
+    <section class="w-full flex justify-center bg-[#FFFAFA] pb-2">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-10 w-full max-w-5xl">
             <!-- Colonne Prix -->
             <div class="bg-white rounded-xl shadow-lg p-8 flex flex-col justify-center">
@@ -154,7 +202,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $galaOuvert) {
                     </p>
                 </div>
                 <!-- Section : Comment se déroule la collecte -->
-                <div class="mt-8 rounded-lg p-6">
+                <div class="mt-8 rounded-lg p-6 ">
                     <h3 class="text-xl font-semibold text-pink-600 mb-3">Collecte des données</h3>
                     <p class="text-gray-700 text-base">
                     Après chaque Gala, vos données personnelles enregistrées sur notre site seront supprimées afin de garantir la confidentialité et d'éviter toute fuite d'informations.
@@ -233,7 +281,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $galaOuvert) {
     </section>
 
 <!-- FAQ --><br><br><br>
-<section class="bg-[#FFFAFA]">
+<section>
 <section class="max-w-3xl mx-auto my-16">
     <h2 class="text-3xl font-bold text-center text-pink-600 mb-8">FAQ - Questions fréquentes</h2>
     <div class="space-y-4" id="faqAccordion">

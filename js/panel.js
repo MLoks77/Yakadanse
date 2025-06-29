@@ -20,6 +20,8 @@ document.addEventListener('DOMContentLoaded', function() {
         loadGalaStatus();
         loadPrix();
         loadPrixDanseuses();
+        loadTexte('gala_texte');
+        loadTexte('index_texte');
     }, 100);
 });
 
@@ -49,6 +51,18 @@ function setupEventListeners() {
         }
         if (e.target.classList.contains('btn-update-prix-danseuses')) {
             handleUpdatePrixDanseuses();
+        }
+        if (e.target.classList.contains('btn-update-texte-gala') || e.target.classList.contains('btn-update-texte-index')) {
+            handleUpdateTexte(e.target.dataset.type);
+        }
+        if (e.target.classList.contains('btn-delete-texte-gala') || e.target.classList.contains('btn-delete-texte-index')) {
+            handleDeleteTexte(e.target.dataset.type);
+        }
+        if (e.target.classList.contains('btn-upload-image-gala') || e.target.classList.contains('btn-upload-image-index')) {
+            handleUploadImage(e.target.dataset.type);
+        }
+        if (e.target.classList.contains('btn-delete-image-gala') || e.target.classList.contains('btn-delete-image-index')) {
+            handleDeleteImage(e.target.dataset.type);
         }
         // Gestion de la pagination pour les réservations en attente
         if (e.target.classList.contains('btn-prev-page-pending')) {
@@ -396,6 +410,141 @@ function loadPrixDanseuses() {
     .catch(error => {
         console.error('Erreur lors du chargement des prix des danseuses:', error);
     });
+}
+
+// Fonction pour charger un texte
+function loadTexte(type) {
+    fetch(`admin_actions.php?action=get_texte&type=${type}`)
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            const element = document.getElementById(type);
+            if (element) {
+                element.value = data.texte || '';
+            }
+        }
+    })
+    .catch(error => {
+        console.error('Erreur lors du chargement du texte:', error);
+    });
+}
+
+// Fonction pour mettre à jour un texte
+function handleUpdateTexte(type) {
+    const texte = document.getElementById(type).value;
+    
+    fetch('admin_actions.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `action=update_texte&type=${type}&texte=${encodeURIComponent(texte)}`
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            showNotification('Texte mis à jour avec succès !', 'success');
+        } else {
+            showNotification('Erreur lors de la mise à jour du texte', 'error');
+        }
+    })
+    .catch(error => {
+        console.error('Erreur:', error);
+        showNotification('Erreur de connexion', 'error');
+    });
+}
+
+// Fonction pour supprimer un texte
+function handleDeleteTexte(type) {
+    showConfirmModal(
+        'Supprimer le texte',
+        'Êtes-vous sûr de vouloir supprimer ce texte ?',
+        () => {
+            fetch('admin_actions.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `action=delete_texte&type=${type}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    showNotification('Texte supprimé avec succès !', 'success');
+                    loadTexte(type);
+                } else {
+                    showNotification('Erreur lors de la suppression du texte', 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+                showNotification('Erreur de connexion', 'error');
+            });
+        }
+    );
+}
+
+// Fonction pour uploader une image
+function handleUploadImage(type) {
+    const fileInput = document.getElementById(type.replace('_img', '_image_input'));
+    const file = fileInput.files[0];
+    
+    if (!file) {
+        showNotification('Veuillez sélectionner une image', 'error');
+        return;
+    }
+    
+    const formData = new FormData();
+    formData.append('action', 'upload_image');
+    formData.append('type', type);
+    formData.append('image', file);
+    
+    fetch('admin_actions.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            showNotification('Image uploadée avec succès !', 'success');
+            fileInput.value = '';
+        } else {
+            showNotification('Erreur lors de l\'upload de l\'image', 'error');
+        }
+    })
+    .catch(error => {
+        console.error('Erreur:', error);
+        showNotification('Erreur de connexion', 'error');
+    });
+}
+
+// Fonction pour supprimer une image
+function handleDeleteImage(type) {
+    showConfirmModal(
+        'Supprimer l\'image',
+        'Êtes-vous sûr de vouloir supprimer cette image ?',
+        () => {
+            fetch('admin_actions.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `action=delete_image&type=${type}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    showNotification('Image supprimée avec succès !', 'success');
+                } else {
+                    showNotification('Erreur lors de la suppression de l\'image', 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Erreur:', error);
+                showNotification('Erreur de connexion', 'error');
+            });
+        }
+    );
 }
 
 // Mise à jour des tableaux
