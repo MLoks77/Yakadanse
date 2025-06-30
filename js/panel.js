@@ -494,27 +494,59 @@ function handleUploadImage(type) {
         return;
     }
     
+    // Validation côté client
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+    if (!allowedTypes.includes(file.type)) {
+        showNotification('Type de fichier non autorisé. Utilisez JPEG, PNG, GIF ou WebP', 'error');
+        return;
+    }
+    
+    if (file.size > 5 * 1024 * 1024) { // 5MB
+        showNotification('Fichier trop volumineux (max 5MB)', 'error');
+        return;
+    }
+    
+    console.log('Upload d\'image en cours...', { type, fileName: file.name, fileSize: file.size });
+    
     const formData = new FormData();
     formData.append('action', 'upload_image');
     formData.append('type', type);
     formData.append('image', file);
     
+    // Afficher un indicateur de chargement
+    const uploadBtn = document.querySelector(`[data-type="${type}"]`);
+    const originalText = uploadBtn.textContent;
+    uploadBtn.textContent = 'Upload en cours...';
+    uploadBtn.disabled = true;
+    
     fetch('admin_actions.php', {
         method: 'POST',
         body: formData
     })
-    .then(response => response.json())
+    .then(response => {
+        console.log('Réponse reçue:', response.status, response.statusText);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    })
     .then(data => {
+        console.log('Données reçues:', data);
         if (data.success) {
             showNotification('Image uploadée avec succès !', 'success');
             fileInput.value = '';
         } else {
-            showNotification('Erreur lors de l\'upload de l\'image', 'error');
+            showNotification(`Erreur: ${data.message}`, 'error');
         }
     })
     .catch(error => {
-        console.error('Erreur:', error);
-        showNotification('Erreur de connexion', 'error');
+        console.error('Erreur lors de l\'upload:', error);
+        showNotification('Erreur de connexion lors de l\'upload de l\'image', 'error');
+    })
+    .finally(() => {
+        // Restaurer le bouton
+        uploadBtn.textContent = originalText;
+        uploadBtn.disabled = false;
     });
 }
 

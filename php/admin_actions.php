@@ -1,12 +1,17 @@
 <?php
 // Fichier pour gérer les actions AJAX du panneau d'administration
-header('Content-Type: application/json');
+
+// Déterminer le Content-Type en fonction de l'action
+$action = $_GET['action'] ?? $_POST['action'] ?? '';
+
+// Ne pas définir le header JSON pour l'upload d'images
+if ($action !== 'upload_image') {
+    header('Content-Type: application/json');
+}
 
 require_once '../configdb/setup.php';
 
 // Récupération de l'action demandée
-$action = $_GET['action'] ?? $_POST['action'] ?? '';
-
 switch($action) {
     case 'get_reservations':
         getReservations($pdo);
@@ -546,6 +551,9 @@ function deleteTexte($pdo) {
 
 // Fonction pour uploader une image
 function uploadImage($pdo) {
+    // Définir le header JSON pour la réponse
+    header('Content-Type: application/json');
+    
     $type = $_POST['type'] ?? '';
     
     if (!$type) {
@@ -554,7 +562,33 @@ function uploadImage($pdo) {
     }
     
     if (!isset($_FILES['image']) || $_FILES['image']['error'] !== UPLOAD_ERR_OK) {
-        echo json_encode(['success' => false, 'message' => 'Aucune image fournie ou erreur d\'upload']);
+        $errorMessage = 'Aucune image fournie';
+        if (isset($_FILES['image'])) {
+            switch ($_FILES['image']['error']) {
+                case UPLOAD_ERR_INI_SIZE:
+                    $errorMessage = 'Le fichier dépasse la taille maximale autorisée par PHP';
+                    break;
+                case UPLOAD_ERR_FORM_SIZE:
+                    $errorMessage = 'Le fichier dépasse la taille maximale autorisée par le formulaire';
+                    break;
+                case UPLOAD_ERR_PARTIAL:
+                    $errorMessage = 'Le fichier n\'a été que partiellement uploadé';
+                    break;
+                case UPLOAD_ERR_NO_FILE:
+                    $errorMessage = 'Aucun fichier n\'a été uploadé';
+                    break;
+                case UPLOAD_ERR_NO_TMP_DIR:
+                    $errorMessage = 'Dossier temporaire manquant';
+                    break;
+                case UPLOAD_ERR_CANT_WRITE:
+                    $errorMessage = 'Échec de l\'écriture du fichier sur le disque';
+                    break;
+                case UPLOAD_ERR_EXTENSION:
+                    $errorMessage = 'Une extension PHP a arrêté l\'upload du fichier';
+                    break;
+            }
+        }
+        echo json_encode(['success' => false, 'message' => $errorMessage]);
         return;
     }
     
@@ -562,7 +596,7 @@ function uploadImage($pdo) {
     $allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
     
     if (!in_array($file['type'], $allowedTypes)) {
-        echo json_encode(['success' => false, 'message' => 'Type de fichier non autorisé']);
+        echo json_encode(['success' => false, 'message' => 'Type de fichier non autorisé. Types acceptés: JPEG, PNG, GIF, WebP']);
         return;
     }
     
@@ -572,10 +606,25 @@ function uploadImage($pdo) {
     }
     
     try {
+        // Vérifier que le dossier de destination existe
+        $uploadDir = '../images/img/';
+        if (!is_dir($uploadDir)) {
+            if (!mkdir($uploadDir, 0755, true)) {
+                echo json_encode(['success' => false, 'message' => 'Impossible de créer le dossier de destination']);
+                return;
+            }
+        }
+        
+        // Vérifier les permissions d'écriture
+        if (!is_writable($uploadDir)) {
+            echo json_encode(['success' => false, 'message' => 'Le dossier de destination n\'est pas accessible en écriture']);
+            return;
+        }
+        
         // Générer un nom de fichier unique
-        $extension = pathinfo($file['name'], PATHINFO_EXTENSION);
+        $extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
         $filename = $type . '_' . time() . '.' . $extension;
-        $uploadPath = '../images/img/' . $filename;
+        $uploadPath = $uploadDir . $filename;
         
         // Supprimer l'ancienne image si elle existe
         $stmt = $pdo->prepare("SELECT chemin_image FROM image WHERE type = ? LIMIT 1");
@@ -583,7 +632,7 @@ function uploadImage($pdo) {
         $oldImage = $stmt->fetch(PDO::FETCH_ASSOC);
         
         if ($oldImage && $oldImage['chemin_image']) {
-            $oldPath = '../images/img/' . $oldImage['chemin_image'];
+            $oldPath = $uploadDir . $oldImage['chemin_image'];
             if (file_exists($oldPath)) {
                 unlink($oldPath);
             }
@@ -606,9 +655,13 @@ function uploadImage($pdo) {
             
             echo json_encode(['success' => true, 'message' => 'Image uploadée avec succès', 'filename' => $filename]);
         } else {
-            echo json_encode(['success' => false, 'message' => 'Erreur lors de l\'upload de l\'image']);
+            echo json_encode(['success' => false, 'message' => 'Erreur lors de l\'upload de l\'image. Vérifiez les permissions du dossier.']);
         }
     } catch(PDOException $e) {
+        error_log("Erreur PDO lors de l'upload d'image: " . $e->getMessage());
+        echo json_encode(['success' => false, 'message' => 'Erreur de base de données lors de l\'upload de l\'image']);
+    } catch(Exception $e) {
+        error_log("Erreur générale lors de l'upload d'image: " . $e->getMessage());
         echo json_encode(['success' => false, 'message' => 'Erreur lors de l\'upload de l\'image']);
     }
 }

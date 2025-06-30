@@ -103,16 +103,6 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
 
             <!-- Contrôles rapides -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                <!-- Contrôle du Gala -->
-                <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Contrôle du Gala</h3>
-                    <div class="space-y-3">
-                        <p class="text-sm text-gray-600">Statut actuel : <span id="gala-status-text-control" class="font-medium">-</span></p>
-                        <button id="gala-toggle-btn" class="btn-toggle-gala status-btn w-full bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200">
-                            Chargement...
-                        </button>
-                    </div>
-                </div>
 
                 <!-- Gestion des Prix -->
                 <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
@@ -126,7 +116,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
                             <label class="block text-sm font-medium text-gray-700 mb-1">Prix Enfant (€)</label>
                             <input type="number" id="prix_enfant" step="0.01" min="0" class="form-input w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                         </div>
-                        <button class="btn-update-prix w-full bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200">
+                        <button class="btn-update-prix w-full bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200">
                             Mettre à jour
                         </button>
                     </div>
@@ -148,7 +138,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
                             <label class="block text-sm font-medium text-gray-700 mb-1">3 danseuses (€)</label>
                             <input type="number" id="prix_danseuse3" step="0.01" min="0" class="form-input w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                         </div>
-                        <button class="btn-update-prix-danseuses w-full bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200">
+                        <button class="btn-update-prix-danseuses w-full bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200">
                             Mettre à jour
                         </button>
                     </div>
@@ -159,7 +149,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
                     <h3 class="text-lg font-semibold text-gray-900 mb-4">Contenu du Gala</h3>
                     <div class="space-y-4">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Texte des nouvelles du gala, attention les émojis peuvent causer des problèmes</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-1"><p class="text-[12] text-grey">attention les émojis peuvent causer des problèmes</p></label>
                             <textarea id="gala_texte" rows="4" class="form-input w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Entrez le texte des nouvelles du gala..."></textarea>
                         </div>
                         <div class="flex gap-2">
@@ -172,9 +162,10 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
                         </div>
                         
                         <div class="border-t pt-4">
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Image du gala</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Image du gala (optionnel)</label>
                             <div class="space-y-2">
-                                <input type="file" id="gala_image_input" accept="image/*" class="form-input w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <label class="block text-sm font-medium text-gray-700 mb-1"><p class="mb-2 text-[12] text-grey">l'image apparait lorsque du texte est présent</p></label>
+                                <input type="file" id="gala_image_input" accept="image/*" class="text-[12px] form-input w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                                 <div class="flex gap-2">
                                     <button class="btn-upload-image-gala flex-1 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200" data-type="gala_img">
                                         Uploader
@@ -190,10 +181,10 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
 
                 <!-- Gestion du Contenu Dynamique - Index -->
                 <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
-                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Contenu de l'Accueil</h3>
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Contenu de l'accueil</h3>
                     <div class="space-y-4">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Texte des actualités, attention les émojis peuvent causer des problèmes</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-1"><p class="text-[12] text-grey">attention les émojis peuvent causer des problèmes</p></label>
                             <textarea id="index_texte" rows="4" class="form-input w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Entrez le texte des actualités..."></textarea>
                         </div>
                         <div class="flex gap-2">
@@ -206,9 +197,10 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
                         </div>
                         
                         <div class="border-t pt-4">
-                            <label class="block text-sm font-medium text-gray-700 mb-2">Image des actualités</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Image des actualités (optionnel)</label>
                             <div class="space-y-2">
-                                <input type="file" id="index_image_input" accept="image/*" class="form-input w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <label class="block text-sm font-medium text-gray-700 mb-1"><p class="mb-2 text-[12] text-grey">l'image apparait lorsque du texte est présent</p></label>
+                                <input type="file" id="index_image_input" accept="image/*" class="text-[12px] form-input w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                                 <div class="flex gap-2">
                                     <button class="btn-upload-image-index flex-1 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200" data-type="index_img">
                                         Uploader
@@ -226,7 +218,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
                 <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
                     <h3 class="text-lg font-semibold text-gray-900 mb-4">Supprimer les données</h3>
                     <div class="space-y-3">
-                        <button class="btn-clear-all w-full bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200">
+                        <button class="btn-clear-all w-full bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200 mt-5">
                             Vider toutes les réservations
                         </button>
                         <p class="text-xs text-gray-500">⚠️ Cette action est irréversible, veuillez vider la base de donnée après chaque gala afin de respecter les mentions légales établis.</p>
@@ -244,6 +236,17 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
                             Test Connexion DB
                         </button>
                         <p class="text-xs text-gray-500">Recharge les données depuis la base</p>
+                    </div>
+                </div>
+
+                                <!-- Contrôle du Gala -->
+                                <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-200">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Contrôle du Gala</h3>
+                    <div class="space-y-3">
+                        <p class="text-sm text-gray-600">Statut actuel : <span id="gala-status-text-control" class="font-medium">-</span></p>
+                        <button id="gala-toggle-btn" class="btn-toggle-gala status-btn w-full bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200">
+                            Chargement...
+                        </button>
                     </div>
                 </div>
             </div>
