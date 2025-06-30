@@ -166,6 +166,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
                             <label class="block text-sm font-medium text-gray-700 mb-2">Image du gala (optionnel)</label>
                             <div class="space-y-2">
                             <label class="block text-sm font-medium text-gray-700 mb-1"><p class="mb-2 text-[12] text-grey">l'image apparait lorsque du texte est présent</p></label>
+                                <div id="gala-image-status" class="text-red-600 text-sm font-medium">Chargement du statut...</div>
                                 <input type="file" id="gala_image_input" accept="image/*" class="text-[12px] form-input w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                                 <div class="flex gap-2">
                                     <button class="btn-upload-image-gala flex-1 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200" data-type="gala_img">
@@ -201,6 +202,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
                             <label class="block text-sm font-medium text-gray-700 mb-2">Image des actualités (optionnel)</label>
                             <div class="space-y-2">
                             <label class="block text-sm font-medium text-gray-700 mb-1"><p class="mb-2 text-[12] text-grey">l'image apparait lorsque du texte est présent</p></label>
+                                <div id="index-image-status" class="text-red-600 text-sm font-medium">Chargement du statut...</div>
                                 <input type="file" id="index_image_input" accept="image/*" class="text-[12px] form-input w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500">
                                 <div class="flex gap-2">
                                     <button class="btn-upload-image-index flex-1 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-medium transition-all duration-200" data-type="index_img">

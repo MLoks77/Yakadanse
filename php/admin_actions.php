@@ -64,6 +64,9 @@ switch($action) {
     case 'delete_image':
         deleteImage($pdo);
         break;
+    case 'get_image_status':
+        getImageStatus($pdo);
+        break;
     default:
         echo json_encode(['success' => false, 'message' => 'Action non reconnue']);
 }
@@ -695,6 +698,27 @@ function deleteImage($pdo) {
         echo json_encode(['success' => true, 'message' => 'Image supprimée avec succès']);
     } catch(PDOException $e) {
         echo json_encode(['success' => false, 'message' => 'Erreur lors de la suppression de l\'image']);
+    }
+}
+
+// Fonction pour récupérer le statut des images
+function getImageStatus($pdo) {
+    try {
+        $stmt = $pdo->prepare("SELECT type, chemin_image FROM image WHERE chemin_image IS NOT NULL");
+        $stmt->execute();
+        $images = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        
+        $status = [];
+        foreach ($images as $image) {
+            $status[$image['type']] = $image['chemin_image'];
+        }
+        
+        echo json_encode([
+            'success' => true,
+            'images' => $status
+        ]);
+    } catch(PDOException $e) {
+        echo json_encode(['success' => false, 'message' => 'Erreur lors de la récupération du statut des images']);
     }
 }
 ?> 

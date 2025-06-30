@@ -22,6 +22,7 @@ document.addEventListener('DOMContentLoaded', function() {
         loadPrixDanseuses();
         loadTexte('gala_texte');
         loadTexte('index_texte');
+        loadImageStatus();
     }, 100);
 });
 
@@ -429,6 +430,47 @@ function loadTexte(type) {
     });
 }
 
+// Fonction pour charger le statut des images
+function loadImageStatus() {
+    fetch('admin_actions.php?action=get_image_status')
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            updateImageStatus(data.images);
+        }
+    })
+    .catch(error => {
+        console.error('Erreur lors du chargement du statut des images:', error);
+    });
+}
+
+// Fonction pour mettre à jour l'affichage du statut des images
+function updateImageStatus(images) {
+    // Statut pour l'image du gala
+    const galaStatusElement = document.getElementById('gala-image-status');
+    if (galaStatusElement) {
+        if (images['gala_img']) {
+            galaStatusElement.textContent = 'Image uploadée: ' + images['gala_img'];
+            galaStatusElement.className = 'text-green-600 text-sm font-medium';
+        } else {
+            galaStatusElement.textContent = 'Aucune image uploadée';
+            galaStatusElement.className = 'text-red-600 text-sm font-medium';
+        }
+    }
+    
+    // Statut pour l'image de l'index
+    const indexStatusElement = document.getElementById('index-image-status');
+    if (indexStatusElement) {
+        if (images['index_img']) {
+            indexStatusElement.textContent = 'Image uploadée: ' + images['index_img'];
+            indexStatusElement.className = 'text-green-600 text-sm font-medium';
+        } else {
+            indexStatusElement.textContent = 'Aucune image uploadée';
+            indexStatusElement.className = 'text-red-600 text-sm font-medium';
+        }
+    }
+}
+
 // Fonction pour mettre à jour un texte
 function handleUpdateTexte(type) {
     const texte = document.getElementById(type).value;
@@ -535,6 +577,7 @@ function handleUploadImage(type) {
         if (data.success) {
             showNotification('Image uploadée avec succès !', 'success');
             fileInput.value = '';
+            loadImageStatus(); // Recharger le statut des images
         } else {
             showNotification(`Erreur: ${data.message}`, 'error');
         }
@@ -567,6 +610,7 @@ function handleDeleteImage(type) {
             .then(data => {
                 if (data.success) {
                     showNotification('Image supprimée avec succès !', 'success');
+                    loadImageStatus(); // Recharger le statut des images
                 } else {
                     showNotification('Erreur lors de la suppression de l\'image', 'error');
                 }
