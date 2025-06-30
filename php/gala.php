@@ -137,11 +137,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $galaOuvert) {
     </section>
 
 
-    <!-- Section double : Prix & Formulaire (toujours côte à côte sur desktop, centrée sur mobile) -->
-    <h1 class="bg-[#FFFAFA] text-3xl md:text-4xl font-extrabold text-pink-600 text-center">Réserver vos place<br><br></h1>
+
     
     <!-- Section Nouvelles du Gala -->
-    <section class="bg-white py-8">
+    <section class=" py-8">
         <div class="container mx-auto px-6 max-w-4xl">
             <div class="bg-white rounded-xl shadow-lg p-8">
                 <h2 class="text-2xl font-bold text-pink-600 mb-6 text-center">Les dernières nouvelles du gala</h2>
@@ -177,8 +176,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $galaOuvert) {
             </div>
         </div>
     </section>
-    
-    <section class="w-full flex justify-center bg-[#FFFAFA] pb-2">
+        <!-- Section double : Prix & Formulaire (toujours côte à côte sur desktop, centrée sur mobile) -->
+        <h1 class="bg-[#FFFAFA] text-3xl md:text-4xl font-extrabold text-pink-600 text-center"><br>Réserver vos place<br><br></h1>
+    <section class="w-full flex justify-center bg-[#FFFAFA] pb-3">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-10 w-full max-w-5xl">
             <!-- Colonne Prix -->
             <div class="bg-white rounded-xl shadow-lg p-8 flex flex-col justify-center">
@@ -280,7 +280,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $galaOuvert) {
         </div>
     </section>
 
-<!-- FAQ --><br><br><br>
+<!-- FAQ -->
 <section>
 <section class="max-w-3xl mx-auto my-16">
     <h2 class="text-3xl font-bold text-center text-pink-600 mb-8">FAQ - Questions fréquentes</h2>

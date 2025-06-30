@@ -155,7 +155,7 @@ $indexImage = $stmt->fetch(PDO::FETCH_ASSOC);
         </section>
 
         <!-- Section Nos Événements -->
-        <section class="py-16 bg-white">
+        <section class="py-16 bg-[#FFFAFA]">
             <div class="container mx-auto px-6 max-w-6xl">
                 <div class="text-center mb-12 animate-fade-in-up">
                     <h2 class="text-3xl md:text-4xl font-extrabold text-pink-600 mb-4 funnel-display">Nos Événements</h2>
@@ -269,7 +269,7 @@ $indexImage = $stmt->fetch(PDO::FETCH_ASSOC);
         </section>
 
         <!-- Section Nos Disciplines -->
-        <section class="py-16 bg-[#FFFAFA]">
+        <section class="py-16 bg-white">
             <div class="container mx-auto px-6 max-w-6xl">
                 <div class="text-center mb-12 animate-fade-in-up">
                     <h2 class="text-3xl md:text-4xl font-extrabold text-pink-600 mb-4 funnel-display">Moderne Jazz</h2>
@@ -320,7 +320,7 @@ $indexImage = $stmt->fetch(PDO::FETCH_ASSOC);
             </div>
         </section>
 
-        <section class="py-16 bg-white">
+        <section class="py-16 bg-[#FFFAFA]">
             <div class="container mx-auto px-6 max-w-6xl">
                 <div class="text-center mb-12 animate-fade-in-up">
                     <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4 funnel-display">Comment nous retrouver</h2>
@@ -339,7 +339,7 @@ $indexImage = $stmt->fetch(PDO::FETCH_ASSOC);
             </div>
         </section>
 
-        <section class="py-12 bg-white">
+        <section class="py-12 bg-[#FFFAFA]">
             <div class="container mx-auto px-6 max-w-4xl text-center">
                 <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-6">Suivez-nous aussi sur les réseaux sociaux</h2>
                 <p class="text-gray-600 mb-8">Afin de rester informé de nos actualités, événements et photos, rejoignez-nous sur nos réseaux :</p>
