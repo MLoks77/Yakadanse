@@ -71,7 +71,7 @@ $indexImage = $stmt->fetch(PDO::FETCH_ASSOC);
                                         d="M13 10V3L4 14h7v7l9-11h-7z" />
                                 </svg>
                             </div>
-                            <h3 class="text-xl font-bold text-gray-800 mb-3">Cours pour tous</h3>
+                            <h3 class="text-xl font-extrabold text-pink-600 mb-3">Cours pour tous</h3>
                             <p class="text-gray-600">Des cours adaptés à tous les niveaux, de 6 ans à l'âge adulte</p>
                         </div>
                     </div>
@@ -87,7 +87,7 @@ $indexImage = $stmt->fetch(PDO::FETCH_ASSOC);
                                         d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                                 </svg>
                             </div>
-                            <h3 class="text-xl font-bold text-gray-800 mb-3">Spectacles annuels</h3>
+                            <h3 class="text-xl font-extrabold text-pink-600 mb-3">Spectacles annuels</h3>
                             <p class="text-gray-600">Tout les ans l'association organise un gala au mois de Juin. Ce
                                 gala thématique se déroule au Pôle Culturel de Saint-Pathus sur deux représentations.
                             </p>
@@ -105,7 +105,7 @@ $indexImage = $stmt->fetch(PDO::FETCH_ASSOC);
                                         d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                                 </svg>
                             </div>
-                            <h3 class="text-xl font-bold text-gray-800 mb-3">Communauté</h3>
+                            <h3 class="text-xl font-extrabold text-pink-600 mb-3">Communauté</h3>
                             <p class="text-gray-600">Partagez votre enthousiasme pour la danse dans un environnement
                                 chaleureux et encourageant, où l'entraide et la bienveillance sont au cœur de nos
                                 valeurs.</p>
@@ -118,10 +118,10 @@ $indexImage = $stmt->fetch(PDO::FETCH_ASSOC);
         <section class="py-16 bg-white">
             <div class="container mx-auto px-6 max-w-6xl">
                 <div class="text-center mb-12 animate-fade-in-up">
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4 funnel-display">Actualités</h2>
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-pink-600 mb-4 funnel-display">Actualités</h2>
                 </div>
                 
-                <div class="bg-gradient-to-r from-pink-50 to-purple-50 rounded-xl shadow-lg p-8">
+                <div class="bg-white rounded-xl shadow-lg p-8">
                     <?php if ($indexTexte && $indexTexte['texte']): ?>
                         <div class="flex flex-col md:flex-row gap-8 items-center">
                             <?php if ($indexImage && $indexImage['chemin_image']): ?>
@@ -158,7 +158,7 @@ $indexImage = $stmt->fetch(PDO::FETCH_ASSOC);
         <section class="py-16 bg-white">
             <div class="container mx-auto px-6 max-w-6xl">
                 <div class="text-center mb-12 animate-fade-in-up">
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4 funnel-display">Nos Événements</h2>
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-pink-600 mb-4 funnel-display">Nos Événements</h2>
                     <p class="text-lg text-gray-600 max-w-2xl mx-auto">
                         Découvrez notre spectacle annuel
                     </p>
@@ -168,7 +168,7 @@ $indexImage = $stmt->fetch(PDO::FETCH_ASSOC);
                     <div class="container mx-auto px-6 max-w-6xl flex flex-col md:flex-row items-center gap-12">
                         <!-- Texte à gauche -->
                         <div class="md:w-1/2 w-full mb-8 md:mb-0">
-                            <h3 class="text-2xl md:text-3xl font-bold text-gray-800 mb-4 funnel-display">Gala de Juin
+                            <h3 class="text-2xl md:text-3xl font-extrabold text-pink-600 mb-4 funnel-display">Gala de Juin
                             </h3>
                             <p class="text-lg text-gray-700 mb-6">
                                 Chaque année, les professeurs de Yakadanse accompagnent et préparent nos danseuses tout
@@ -272,9 +272,9 @@ $indexImage = $stmt->fetch(PDO::FETCH_ASSOC);
         <section class="py-16 bg-[#FFFAFA]">
             <div class="container mx-auto px-6 max-w-6xl">
                 <div class="text-center mb-12 animate-fade-in-up">
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4 funnel-display">Notre Discipline</h2>
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-pink-600 mb-4 funnel-display">Moderne Jazz</h2>
                     <p class="text-lg text-gray-600 max-w-1xl mx-auto">
-                        Nous proposons uniquement le Moderne Jazz, une discipline complète et accessible à tous.
+                        Nous proposons uniquement des cours basé sur le Moderne Jazz, une discipline complète et accessible à tous.
                     </p>
                 </div>
 

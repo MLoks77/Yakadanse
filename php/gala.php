@@ -141,7 +141,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $galaOuvert) {
     <h1 class="bg-[#FFFAFA] text-3xl md:text-4xl font-extrabold text-pink-600 text-center">Réserver vos place<br><br></h1>
     
     <!-- Section Nouvelles du Gala -->
-    <section class="bg-[#FFFAFA] py-8">
+    <section class="bg-white py-8">
         <div class="container mx-auto px-6 max-w-4xl">
             <div class="bg-white rounded-xl shadow-lg p-8">
                 <h2 class="text-2xl font-bold text-pink-600 mb-6 text-center">Les dernières nouvelles du gala</h2>

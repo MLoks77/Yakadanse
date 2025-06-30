@@ -159,7 +159,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
                     <h3 class="text-lg font-semibold text-gray-900 mb-4">Contenu du Gala</h3>
                     <div class="space-y-4">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Texte des nouvelles</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Texte des nouvelles du gala, attention les émojis peuvent causer des problèmes</label>
                             <textarea id="gala_texte" rows="4" class="form-input w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Entrez le texte des nouvelles du gala..."></textarea>
                         </div>
                         <div class="flex gap-2">
@@ -193,7 +193,7 @@ if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
                     <h3 class="text-lg font-semibold text-gray-900 mb-4">Contenu de l'Accueil</h3>
                     <div class="space-y-4">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-1">Texte des actualités</label>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Texte des actualités, attention les émojis peuvent causer des problèmes</label>
                             <textarea id="index_texte" rows="4" class="form-input w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Entrez le texte des actualités..."></textarea>
                         </div>
                         <div class="flex gap-2">
